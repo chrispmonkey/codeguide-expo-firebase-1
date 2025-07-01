@@ -119,7 +119,7 @@
             "title": "Create Firebase Project in Console",
             "description": "Set up a new Firebase project through the Firebase console with appropriate naming and settings for the application.",
             "dependencies": [],
-            "details": "1. Navigate to Firebase Console (https://console.firebase.google.com/)\n2. Click 'Add project' and provide a project name\n3. Configure Google Analytics settings as needed\n4. Select appropriate location/region settings\n5. Complete project creation and note down the project ID\n<info added on 2025-07-01T07:36:01.851Z>\n**Firebase Project Creation Instructions:**\n\nTo create the Firebase project for Astrophysicals:\n\n1. **Navigate to Firebase Console**: Go to https://console.firebase.google.com/\n2. **Create New Project**: Click \"Add project\" or \"Create a project\"\n3. **Project Details**:\n   - Project name: `astrophysicals` \n   - Project ID: `astrophysicals-[unique-suffix]` (Firebase will suggest)\n   - Location: Choose your preferred region (e.g., us-central1)\n4. **Google Analytics**: Enable for app analytics (recommended)\n5. **Complete Setup**: Wait for project creation to finish\n\n**Important**: Once created, note down the **Project ID** as we'll need it for the next steps.\n</info added on 2025-07-01T07:36:01.851Z>",
+            "details": "1. Navigate to Firebase Console (https://console.firebase.google.com/)\n2. Click 'Add project' and provide a project name\n3. Configure Google Analytics settings as needed\n4. Select appropriate location/region settings\n5. Complete project creation and note down the project ID\n<info added on 2025-07-01T07:36:01.851Z>\n**Firebase Project Creation Instructions:**\n\nTo create the Firebase project for Astrophysicals:\n\n1. **Navigate to Firebase Console**: Go to https://console.firebase.google.com/\n2. **Create New Project**: Click \"Add project\" or \"Create a project\"\n3. **Project Details**:\n   - Project name: `astrophysicals` \n   - Project ID: `astrophysicals-[unique-suffix]` (Firebase will suggest)\n   - Location: Choose your preferred region (e.g., us-central1)\n4. **Google Analytics**: Enable for app analytics (recommended)\n5. **Complete Setup**: Wait for project creation to finish\n\n**Important**: Once created, note down the **Project ID** as we'll need it for the next steps.\n</info added on 2025-07-01T07:36:01.851Z>\n<info added on 2025-07-01T07:50:33.548Z>\n**Manual Verification Required:**\n\nBased on the existing environment configuration, the Firebase project `astro-app-81f22` appears to already exist and be configured. \n\n**To verify completion:**\n1. ✅ Project ID exists: `astro-app-81f22` (confirmed in environment variables)\n2. ✅ Configuration values present in .env files\n3. ✅ Firebase CLI successfully connects to project\n\n**Manual verification needed:** Visit Firebase console to confirm the project exists and is properly set up. If the project is accessible and working, this subtask can be marked as done.\n</info added on 2025-07-01T07:50:33.548Z>",
             "status": "pending",
             "testStrategy": "Verify project appears in Firebase console dashboard and all basic settings are correctly configured"
           },
@@ -130,7 +130,7 @@
             "dependencies": [
               1
             ],
-            "details": "1. In Firebase console, navigate to each service section\n2. For Firestore: Create database in production or test mode\n3. For Authentication: Enable email/password and any other auth methods\n4. For Storage: Initialize with appropriate region\n5. For Cloud Functions: Enable the service\n6. For FCM: Configure cloud messaging",
+            "details": "1. In Firebase console, navigate to each service section\n2. For Firestore: Create database in production or test mode\n3. For Authentication: Enable email/password and any other auth methods\n4. For Storage: Initialize with appropriate region\n5. For Cloud Functions: Enable the service\n6. For FCM: Configure cloud messaging\n<info added on 2025-07-01T07:51:02.731Z>\n**Service Enablement Verification Required:**\n\nSince we have a working Firebase project configuration, the services may already be enabled. \n\n**To verify/enable in Firebase Console:**\n1. **Firestore**: Navigate to Firestore Database - should show \"Create database\" or existing database\n2. **Authentication**: Go to Authentication - enable Email/Password at minimum  \n3. **Storage**: Check Storage section - initialize if needed\n4. **Cloud Functions**: Verify Functions service is enabled\n5. **Cloud Messaging**: Check FCM is available for notifications\n\n**Current Status**: All services are configured in our firebase.json and code. Manual verification in console needed to confirm they're enabled in the actual project.\n</info added on 2025-07-01T07:51:02.731Z>",
             "status": "pending",
             "testStrategy": "Check each service dashboard to confirm activation status and initial configuration"
           },
@@ -142,7 +142,7 @@
               1
             ],
             "details": "1. Install Firebase CLI globally: `npm install -g firebase-tools`\n2. Login to Firebase: `firebase login`\n3. Initialize Firebase in project directory: `firebase init`\n4. Select previously created project\n5. Choose required features (Firestore, Functions, Storage, etc.)\n6. Configure directory structure as prompted",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run `firebase projects:list` to verify CLI is properly connected to the project"
           },
           {
@@ -154,7 +154,7 @@
               2
             ],
             "details": "1. Install required packages: `npm install firebase`\n2. Create .env file for environment variables\n3. Add Firebase config values to .env file\n4. Create firebase.ts configuration file as shown in the example\n5. Ensure proper imports in the app entry point\n6. Add appropriate type definitions if using TypeScript",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Create a simple test that initializes Firebase and verifies connection is established without errors"
           },
           {
@@ -166,7 +166,7 @@
               4
             ],
             "details": "1. Create firestore.rules file in project root\n2. Define basic security rules for collections\n3. Implement authentication checks\n4. Add role-based access control if needed\n5. Test rules locally using Firebase emulator\n6. Deploy rules using Firebase CLI: `firebase deploy --only firestore:rules`",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write security rules tests using the Firebase emulator suite to verify access patterns work as expected"
           },
           {
@@ -178,7 +178,7 @@
               4
             ],
             "details": "1. Create storage.rules file in project root\n2. Define access rules for different file paths\n3. Implement file size and type validations\n4. Add user-specific storage paths with proper permissions\n5. Test rules locally using Firebase emulator\n6. Deploy rules using Firebase CLI: `firebase deploy --only storage:rules`",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test file upload and download operations with different user authentication states to verify rules are working"
           },
           {
@@ -189,7 +189,7 @@
               3
             ],
             "details": "1. Navigate to functions directory created by Firebase init\n2. Update package.json with required dependencies\n3. Configure TypeScript if using it\n4. Create index.ts/js with basic function exports\n5. Set up directory structure for different function types (auth triggers, Firestore triggers, HTTP functions)\n6. Create sample functions for each type",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests for functions using the Firebase Functions test framework and verify local execution with the emulator"
           },
           {
@@ -200,7 +200,7 @@
               2,
               4
             ],
-            "details": "1. Configure app manifest or Info.plist/AndroidManifest.xml for push notifications\n2. Implement notification permission requests\n3. Set up background and foreground notification handlers\n4. Create utility functions for token registration\n5. Implement functions to send test notifications\n6. Configure notification channels for Android",
+            "details": "1. Configure app manifest or Info.plist/AndroidManifest.xml for push notifications\n2. Implement notification permission requests\n3. Set up background and foreground notification handlers\n4. Create utility functions for token registration\n5. Implement functions to send test notifications\n6. Configure notification channels for Android\n<info added on 2025-07-01T07:49:52.304Z>\n**FCM Configuration Progress:**\n\n✅ **Completed:**\n- Firebase FCM service included in firebase.json configuration\n- Basic FCM integration ready in firebase.ts configuration file\n- Cloud Functions structure supports FCM integration\n- Environment variables properly configured\n\n🔄 **Remaining Work:**\n- Implement React Native notification permissions\n- Set up foreground/background notification handlers  \n- Create notification token registration utilities\n- Configure notification channels for Android\n- Add notification handling to App.tsx\n- Test notification sending through Firebase console\n\nThe foundation is in place, but the React Native notification implementation is still needed. This will be completed as part of the notification system implementation in a future task.\n</info added on 2025-07-01T07:49:52.304Z>",
             "status": "pending",
             "testStrategy": "Send test notifications through Firebase console and verify they are received in both foreground and background app states"
           }
@@ -217,8 +217,125 @@
           1,
           2
         ],
-        "status": "pending",
-        "subtasks": []
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set up Aptos SDK and project dependencies",
+            "description": "Install and configure Aptos SDK and related dependencies required for authentication and wallet functionality.",
+            "dependencies": [],
+            "details": "Install required packages: aptos, expo-secure-store, and other authentication-related libraries. Configure the SDK with appropriate network endpoints (devnet/testnet/mainnet). Set up basic service structure for wallet and authentication services.",
+            "status": "in-progress",
+            "testStrategy": "Verify SDK initialization and connection to Aptos network with a simple query test."
+          },
+          {
+            "id": 2,
+            "title": "Implement secure key storage service",
+            "description": "Create a service to securely store and retrieve private keys using the device's secure enclave.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement a KeyStorageService class using expo-secure-store with methods for storing, retrieving, and deleting private keys. Ensure keys are stored with appropriate security options (WHEN_UNLOCKED). Add encryption layer before storing sensitive data. Include error handling for storage failures.",
+            "status": "pending",
+            "testStrategy": "Test storing and retrieving mock keys to verify the secure storage functionality works correctly."
+          },
+          {
+            "id": 3,
+            "title": "Develop mnemonic generation and validation",
+            "description": "Create utility functions to generate BIP-39 compliant mnemonics and validate them for wallet creation.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement functions to generate random mnemonics of appropriate strength (12/24 words). Add validation to ensure mnemonics conform to BIP-39 standards. Create functions to convert between mnemonics and seed phrases. Include internationalization support for different language wordlists if needed.",
+            "status": "pending",
+            "testStrategy": "Test mnemonic generation, validation, and conversion to ensure they meet cryptographic standards."
+          },
+          {
+            "id": 4,
+            "title": "Implement wallet creation functionality",
+            "description": "Create the core wallet service with methods to create new wallets and recover existing ones from mnemonics.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Implement WalletService with createWallet() method that generates a new Aptos account and stores private keys securely. Add recoverWalletFromMnemonic() method to restore wallets. Include address derivation and validation. Implement getWalletBalance() to fetch account balances.",
+            "status": "pending",
+            "testStrategy": "Test wallet creation, recovery, and balance checking with mock accounts and network responses."
+          },
+          {
+            "id": 5,
+            "title": "Create authentication state management",
+            "description": "Implement state management for user authentication status using a state management solution.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create an AuthContext using React Context API or similar state management. Implement reducer functions for login, logout, and session persistence. Add hooks for components to access authentication state. Implement session persistence using secure storage to maintain login state across app restarts.",
+            "status": "pending",
+            "testStrategy": "Test authentication state transitions and persistence with mock user data."
+          },
+          {
+            "id": 6,
+            "title": "Implement Sign-In with Aptos (SIWA) flow",
+            "description": "Develop the authentication flow using Aptos wallet-based authentication.",
+            "dependencies": [
+              1,
+              5
+            ],
+            "details": "Implement functions to generate authentication challenges. Create methods to verify signatures from Aptos wallets. Set up API endpoints or services to handle the authentication flow. Integrate with AuthContext to update authentication state upon successful login.",
+            "status": "pending",
+            "testStrategy": "Test the SIWA flow with mock wallet signatures and verify correct state updates."
+          },
+          {
+            "id": 7,
+            "title": "Create UI components for login screen",
+            "description": "Design and implement the login screen UI components with SIWA option.",
+            "dependencies": [
+              5,
+              6
+            ],
+            "details": "Create Login screen component with SIWA button. Implement loading states during authentication. Add error handling and user feedback for failed login attempts. Design responsive layout that works across different device sizes.",
+            "status": "pending",
+            "testStrategy": "Perform component testing to ensure UI renders correctly and handles user interactions appropriately."
+          },
+          {
+            "id": 8,
+            "title": "Develop wallet creation UI components",
+            "description": "Create UI for wallet creation flow including mnemonic display and backup confirmation.",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "Design WalletCreation screen with step-by-step flow. Implement mnemonic display with copy functionality. Create mnemonic verification step where users must confirm selected words. Add appropriate security warnings about mnemonic backup. Implement loading and success states.",
+            "status": "pending",
+            "testStrategy": "Test the wallet creation flow UI for usability and correct interaction with wallet services."
+          },
+          {
+            "id": 9,
+            "title": "Implement wallet recovery UI components",
+            "description": "Create UI for wallet recovery from existing mnemonics.",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "Design WalletRecovery screen with mnemonic input. Implement word suggestion and auto-completion for easier input. Add validation for entered mnemonics. Create error handling for invalid mnemonics. Connect to wallet recovery service methods.",
+            "status": "pending",
+            "testStrategy": "Test recovery flow with valid and invalid mnemonics to ensure proper validation and error handling."
+          },
+          {
+            "id": 10,
+            "title": "Integrate authentication with app navigation",
+            "description": "Connect authentication state with app navigation to control access to protected routes.",
+            "dependencies": [
+              5,
+              7,
+              8,
+              9
+            ],
+            "details": "Implement protected route wrappers or navigation guards. Create navigation flow based on authentication state. Add automatic redirection to login when accessing protected routes while unauthenticated. Implement smooth transitions between authentication states. Add logout functionality that clears state and navigates appropriately.",
+            "status": "pending",
+            "testStrategy": "Test navigation flows for authenticated and unauthenticated users to ensure proper access control."
+          }
+        ]
       },
       {
         "id": 4,
@@ -393,7 +510,7 @@
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T07:34:51.836Z",
+      "updated": "2025-07-01T08:10:37.715Z",
       "description": "Tasks for master context"
     }
   }
