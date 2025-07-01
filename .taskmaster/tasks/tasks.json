@@ -259,7 +259,7 @@
               3
             ],
             "details": "Implement WalletService with createWallet() method that generates a new Aptos account and stores private keys securely. Add recoverWalletFromMnemonic() method to restore wallets. Include address derivation and validation. Implement getWalletBalance() to fetch account balances.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test wallet creation, recovery, and balance checking with mock accounts and network responses."
           },
           {
@@ -270,7 +270,7 @@
               1
             ],
             "details": "Create an AuthContext using React Context API or similar state management. Implement reducer functions for login, logout, and session persistence. Add hooks for components to access authentication state. Implement session persistence using secure storage to maintain login state across app restarts.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Test authentication state transitions and persistence with mock user data."
           },
           {
@@ -510,7 +510,7 @@
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T08:38:46.160Z",
+      "updated": "2025-07-01T08:42:55.984Z",
       "description": "Tasks for master context"
     }
   }
