@@ -1,157 +1,241 @@
 [![CodeGuide](/codeguide-backdrop.svg)](https://codeguide.dev)
 
-# CodeGuide Expo Firebase Starter
+# Astrophysicals
 
-A modern cross-platform mobile application starter template built with Expo and Firebase, featuring authentication and real-time database integration.
+A React Native mobile app that turns real-world meetups into instant astrological experiences and digital keepsakes. When two (or more) people physically tap phones (via NFC) or scan QR codes, the app computes a compatibility snapshot from their birth charts — complete with fun ice-breakers and a compatibility score — then mints a one-of-a-kind NFT on the Aptos blockchain.
 
-## Tech Stack
+## 🌟 Features
 
-- **Framework:** [Expo](https://expo.dev/) (SDK 52)
-- **Authentication:** [Firebase Authentication](https://firebase.google.com/products/auth)
-- **Database:** [Firebase](https://firebase.google.com/)
-- **Navigation:** [Expo Router](https://docs.expo.dev/router/introduction/)
-- **UI Components:** [React Native](https://reactnative.dev/) with Expo's built-in components
-- **Icons:** [@expo/vector-icons](https://docs.expo.dev/guides/icons/)
-- **Animations:** [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+- **Instant Connections**: NFC tap or QR code scanning for quick pairing
+- **Astrological Insights**: Real-time compatibility analysis and synastry readings
+- **NFT Minting**: Blockchain-backed digital keepsakes on Aptos
+- **Social Features**: Real-time chat with astrology prompts
+- **Connection Chronicle**: Timeline of connections and shared memories
+- **App Clips/Instant Apps**: Seamless onboarding for new users
 
-## Prerequisites
+## 🚀 Quick Start
 
-Before you begin, ensure you have the following:
+### Prerequisites
 
-- Node.js 18+ installed
-- [Expo CLI](https://docs.expo.dev/get-started/installation/) installed globally
-- A [Firebase](https://firebase.google.com/) project for authentication and backend services
-- Generated project documents from [CodeGuide](https://codeguide.dev/) for best development experience
-- (Optional) [Expo Go](https://expo.dev/client) app installed on your mobile device
+Before you begin, ensure you have the following installed:
 
-## Getting Started
+- **Node.js v20.2.1+** - [Download from nodejs.org](https://nodejs.org/)
+- **Yarn** - Package manager (`npm install -g yarn`)
+- **Expo CLI** - Latest version (`npm install -g @expo/cli`)
+
+### Installation
 
 1. **Clone the repository**
-
    ```bash
-   git clone <repository-url>
-   cd codeguide-expo-firebase
+   git clone https://github.com/your-username/astrophysicals.git
+   cd astrophysicals
    ```
 
 2. **Install dependencies**
-
    ```bash
    npm install
    ```
 
-3. **Environment Variables Setup**
-   - Copy the `.env.example` file to `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Fill in the environment variables in `.env` (see Configuration section below)
-
-4. **Start the development server**
-
+3. **Start the development server**
    ```bash
-   npx expo start
+   npm start
    ```
 
-5. **Run the app:**
-   - Scan the QR code with Expo Go (Android)
-   - Scan the QR code with Camera app (iOS)
-   - Press 'i' for iOS simulator
-   - Press 'a' for Android emulator
+4. **Run on device/simulator**
+   ```bash
+   # iOS Simulator
+   npm run ios
+   
+   # Android Emulator
+   npm run android
+   
+   # Web browser
+   npm run web
+   ```
 
-## Configuration
+## 📱 Development
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start Expo development server |
+| `npm run ios` | Run on iOS simulator |
+| `npm run android` | Run on Android emulator |
+| `npm run web` | Run in web browser |
+| `npm test` | Run Jest tests in watch mode |
+| `npm run lint` | Run ESLint checks |
+| `npm run lint:fix` | Fix ESLint issues automatically |
+| `npm run format` | Format code with Prettier |
+| `npm run format:check` | Check code formatting |
+| `npm run type-check` | Run TypeScript checks |
+| `npm run code-quality` | Run all quality checks |
+
+### Project Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── screens/        # Screen components
+├── navigation/     # Navigation configuration
+├── services/       # API services and external integrations
+├── hooks/          # Custom React hooks
+├── utils/          # Utility functions
+├── types/          # TypeScript type definitions
+├── config/         # Configuration files
+└── App.tsx         # Main application component
+
+documentation/      # Project documentation
+assets/            # Images, fonts, and other static assets
+.taskmaster/       # Task management files
+```
+
+### Technology Stack
+
+- **Frontend**: React Native, Expo, TypeScript
+- **Navigation**: Expo Router
+- **Backend**: Firebase (Firestore, Auth, Functions, Storage)
+- **Blockchain**: Aptos blockchain for NFT minting
+- **Storage**: IPFS (Pinata) with Firebase CDN fallback
+- **APIs**: AstrologyAPI.com for birth charts and synastry
+- **Development**: ESLint, Prettier, Jest
+
+### Code Quality
+
+This project maintains high code quality through:
+
+- **TypeScript** for type safety
+- **ESLint** for code linting
+- **Prettier** for consistent formatting
+- **Jest** for testing
+- **Pre-commit hooks** for automated checks
+
+Run all quality checks:
+```bash
+npm run code-quality
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create `.env` files for different environments:
+
+```bash
+# .env.development
+EXPO_PUBLIC_API_URL=http://localhost:3000
+EXPO_PUBLIC_ENVIRONMENT=development
+
+# .env.production
+EXPO_PUBLIC_API_URL=https://api.astrophysicals.com
+EXPO_PUBLIC_ENVIRONMENT=production
+```
 
 ### Firebase Setup
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project
-3. Add an app to your project (iOS and Android)
-4. Copy the Firebase configuration object
-5. Set up the necessary Firebase services (Authentication, Firestore, etc.)
+1. Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+2. Enable Authentication, Firestore, Functions, and Storage
+3. Add your configuration to `src/config/firebase.ts`
 
-## Environment Variables
+### Aptos Blockchain
 
-Create a `.env` file in the root directory with the following variables:
+1. Set up Aptos wallet integration
+2. Configure testnet/mainnet endpoints
+3. Set up IPFS storage with Pinata
 
-```env
-# Firebase Configuration
-FIREBASE_API_KEY=your_firebase_api_key
-FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-FIREBASE_PROJECT_ID=your_firebase_project_id
-FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-FIREBASE_APP_ID=your_firebase_app_id
-```
+## 📋 Development Workflow
 
-## Features
+1. **Create Feature Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-- 🔐 Firebase Authentication
-- 📦 Firebase Realtime Database/Firestore
-- 📱 Cross-platform (iOS & Android)
-- 🎨 Modern UI with native components
-- 🚀 File-based routing with Expo Router
-- 🔄 Real-time Updates
-- 📱 Responsive Design
-- 💫 Smooth animations with Reanimated
+2. **Development**
+   - Write code following TypeScript best practices
+   - Add tests for new functionality
+   - Update documentation as needed
 
-## Project Structure
+3. **Quality Checks**
+   ```bash
+   npm run code-quality
+   ```
 
-```
-astrophysicals/
-├── app/                # Expo Router pages (file-based routing)
-│   ├── (tabs)/        # Tab navigation group
-│   ├── index.tsx      # Home screen
-│   ├── pairing.tsx    # Re-exports from lib/screens
-│   └── compatibility.tsx # Re-exports from lib/screens
-├── components/         # Reusable React Native components
-│   └── ui/            # UI design system components
-├── lib/               # Business logic and utilities
-│   ├── screens/       # Screen components (separated from routing)
-│   ├── services/      # API and external service integrations
-│   └── utils/         # Utility functions
-├── config/            # Configuration files
-│   └── firebase.ts    # Firebase setup
-├── constants/         # App constants and configurations
-├── hooks/             # Custom React hooks
-├── types/             # TypeScript type definitions
-├── assets/            # Static assets (images, fonts)
-├── documentation/     # Project documentation
-└── .tools/            # AI/Development tool configurations
-    ├── .taskmaster/   # Task management system
-    ├── .cursor/       # Cursor AI settings
-    └── ...            # Other development tools
-```
+4. **Commit Changes**
+   ```bash
+   git add .
+   git commit -m "feat: add your feature description"
+   ```
 
-### Architectural Patterns
+5. **Push and Create PR**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
-1. **Screen Organization**: Screens are implemented in `lib/screens/` for business logic separation, then re-exported in `app/` for Expo Router integration. This allows for better code organization and potential reuse.
+## 🧪 Testing
 
-2. **Environment Configuration**: Separate `.env.development` and `.env.production` files for different environments.
-
-3. **Development Tools**: AI-assisted development tools are organized in `.tools/` directory to keep the root clean while maintaining functionality.
-
-## Documentation Setup
-
-The documentation folder contains all the generated markdown files from CodeGuide:
-
+Run tests with:
 ```bash
-documentation/
-├── project_requirements_document.md
-├── app_flow_document.md
-├── frontend_guideline_document.md
-└── backend_structure_document.md
+npm test
 ```
 
-These documentation files serve as a reference for your project's features and implementation details.
+Test structure:
+- Unit tests for components and utilities
+- Integration tests for services
+- E2E tests for critical user flows
 
-## Contributing
+## 📦 Building & Deployment
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Development Build
+```bash
+npx expo build:android --type apk
+npx expo build:ios --type simulator
+```
 
-## Learn More
+### Production Build
+```bash
+npx expo build:android --type app-bundle
+npx expo build:ios --type archive
+```
 
-To learn more about the technologies used in this project:
+### EAS Build (Recommended)
+```bash
+npx eas build --platform all
+```
 
-- [Expo Documentation](https://docs.expo.dev/)
-- [Firebase Documentation](https://firebase.google.com/docs)
-- [React Native Documentation](https://reactnative.dev/docs/getting-started)
-- [Expo Router Documentation](https://docs.expo.dev/router/introduction/)
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Run quality checks
+6. Submit a pull request
+
+### Coding Standards
+
+- Use TypeScript for all new code
+- Follow the existing code style (enforced by Prettier)
+- Write meaningful commit messages
+- Add JSDoc comments for public APIs
+- Update tests and documentation
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/your-username/astrophysicals/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-username/astrophysicals/discussions)
+- **Documentation**: [Wiki](https://github.com/your-username/astrophysicals/wiki)
+
+## 🌟 Acknowledgments
+
+- Expo team for the excellent React Native framework
+- Firebase for backend services
+- Aptos blockchain for NFT infrastructure
+- AstrologyAPI.com for astrological calculations
+
+---
+
+Made with ❤️ and ✨ by the Astrophysicals team
