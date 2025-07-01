@@ -24,7 +24,9 @@
             "id": 2,
             "title": "Install Expo CLI",
             "description": "Install Expo CLI v7.14.0 globally on the development machine",
-            "dependencies": [1],
+            "dependencies": [
+              1
+            ],
             "details": "Use npm to install Expo CLI globally with the command 'npm install -g expo-cli@7.14.0'. Verify the installation by running 'expo --version' to ensure version 7.14.0 is installed.",
             "status": "done",
             "testStrategy": "Verify installation by running 'expo --version' to confirm the correct version is installed."
@@ -33,7 +35,9 @@
             "id": 3,
             "title": "Create React Native Project with Expo TypeScript Template",
             "description": "Initialize a new React Native project using the Expo TypeScript template",
-            "dependencies": [2],
+            "dependencies": [
+              2
+            ],
             "details": "Run 'npx create-expo-app astrophysicals --template expo-template-typescript' to create a new project with the TypeScript template. Navigate to the project directory with 'cd astrophysicals'.",
             "status": "done",
             "testStrategy": "Verify project creation by ensuring all template files are generated correctly and the project can be started with 'npx expo start'."
@@ -42,7 +46,9 @@
             "id": 4,
             "title": "Initialize Git Repository",
             "description": "Set up Git version control with appropriate .gitignore file",
-            "dependencies": [3],
+            "dependencies": [
+              3
+            ],
             "details": "Initialize Git repository with 'git init'. Create or modify .gitignore file to exclude node_modules, .expo, dist directories, and environment files. Make an initial commit with 'git add .' and 'git commit -m \"Initial commit\"'.",
             "status": "done",
             "testStrategy": "Verify Git initialization by checking that .git directory exists and .gitignore contains all necessary exclusions."
@@ -51,16 +57,20 @@
             "id": 5,
             "title": "Configure ESLint, Prettier, and TypeScript",
             "description": "Set up code quality and formatting tools with appropriate configurations",
-            "dependencies": [3],
+            "dependencies": [
+              3
+            ],
             "details": "Install dev dependencies with 'yarn add -D eslint prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react eslint-plugin-react-native'. Create configuration files: .eslintrc.js, .prettierrc, and verify tsconfig.json. Configure rules according to project standards.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run 'npx eslint .' and 'npx prettier --check .' to verify configurations are working correctly."
           },
           {
             "id": 6,
             "title": "Set Up Project Structure",
             "description": "Organize project directories following Expo best practices",
-            "dependencies": [3],
+            "dependencies": [
+              3
+            ],
             "details": "Create directory structure: src/ for source code with subdirectories for components/, screens/, navigation/, services/, utils/, assets/, hooks/, and types/. Move App.tsx into src/ directory and update imports. Create index files for each directory to facilitate imports.",
             "status": "pending",
             "testStrategy": "Verify project structure by ensuring all directories are created correctly and the app still builds and runs after reorganization."
@@ -69,7 +79,11 @@
             "id": 7,
             "title": "Create Documentation",
             "description": "Create README.md with setup instructions and project information",
-            "dependencies": [4, 5, 6],
+            "dependencies": [
+              4,
+              5,
+              6
+            ],
             "details": "Create a comprehensive README.md file including: project overview, setup instructions, available scripts, folder structure explanation, coding conventions, and contribution guidelines. Include information about Node.js, Yarn, and Expo CLI version requirements.",
             "status": "pending",
             "testStrategy": "Review README.md to ensure all required sections are included and instructions are clear and accurate."
@@ -78,7 +92,10 @@
             "id": 8,
             "title": "Configure Package Dependencies",
             "description": "Update package.json with all required dependencies and scripts",
-            "dependencies": [3, 5],
+            "dependencies": [
+              3,
+              5
+            ],
             "details": "Review and update package.json to include all necessary dependencies. Add useful scripts for development, testing, and building. Configure Expo settings in app.json. Install additional common libraries that will be needed (e.g., react-navigation, axios, etc.). Run 'yarn install' to ensure all dependencies are properly installed.",
             "status": "pending",
             "testStrategy": "Verify configuration by running 'yarn install' and checking that all dependencies install without errors. Test scripts by running them to ensure they work as expected."
@@ -92,7 +109,9 @@
         "details": "1. Create a new Firebase project in the Firebase console\n2. Enable required services: Firestore, Authentication, Cloud Functions, Storage, FCM\n3. Install Firebase CLI and initialize Firebase in the project\n4. Configure Firebase SDK in the React Native app\n5. Set up security rules for Firestore and Storage\n6. Create basic Cloud Functions structure\n\nCode example:\n```typescript\n// firebase.ts\nimport { initializeApp } from 'firebase/app';\nimport { getFirestore } from 'firebase/firestore';\nimport { getAuth } from 'firebase/auth';\nimport { getStorage } from 'firebase/storage';\nimport { getFunctions } from 'firebase/functions';\nimport { getMessaging } from 'firebase/messaging';\n\nconst firebaseConfig = {\n  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,\n  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,\n  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,\n  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,\n  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,\n  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID\n};\n\nconst app = initializeApp(firebaseConfig);\nexport const db = getFirestore(app);\nexport const auth = getAuth(app);\nexport const storage = getStorage(app);\nexport const functions = getFunctions(app);\nexport const messaging = getMessaging(app);\n```",
         "testStrategy": "1. Verify Firebase initialization by checking console for successful connection\n2. Test Firestore connection by performing a simple read operation\n3. Verify Authentication is properly configured\n4. Test Cloud Functions local emulation\n5. Verify Storage rules with mock uploads\n6. Ensure environment variables are properly loaded and secured",
         "priority": "high",
-        "dependencies": [1],
+        "dependencies": [
+          1
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -103,7 +122,10 @@
         "details": "1. Integrate Aptos SDK for authentication\n2. Implement Sign-In with Aptos (SIWA) flow\n3. Create manual wallet creation with mnemonic generation\n4. Implement secure storage of private keys in device's secure enclave\n5. Set up authentication state management\n6. Create UI components for login, signup, and wallet creation\n\nCode example:\n```typescript\n// wallet.service.ts\nimport { AptosClient, AptosAccount, HexString } from 'aptos';\nimport * as SecureStore from 'expo-secure-store';\n\nexport class WalletService {\n  private client: AptosClient;\n  \n  constructor() {\n    this.client = new AptosClient('https://fullnode.devnet.aptoslabs.com/v1');\n  }\n  \n  async createWallet(): Promise<{ address: string, mnemonic: string }> {\n    const account = new AptosAccount();\n    const privateKeyHex = HexString.fromUint8Array(account.signingKey.secretKey).toString();\n    const address = account.address().toString();\n    const mnemonic = this.generateMnemonic(); // Implement mnemonic generation\n    \n    await this.storePrivateKey(address, privateKeyHex);\n    \n    return { address, mnemonic };\n  }\n  \n  private async storePrivateKey(address: string, privateKey: string): Promise<void> {\n    await SecureStore.setItemAsync(`wallet_${address}`, privateKey, {\n      keychainService: 'astrophysicals_wallet',\n      keychainAccessible: SecureStore.WHEN_UNLOCKED\n    });\n  }\n  \n  // Additional methods for wallet management\n}\n```",
         "testStrategy": "1. Test SIWA authentication flow with mock Aptos accounts\n2. Verify wallet creation generates valid Aptos addresses\n3. Test mnemonic generation and recovery\n4. Verify private keys are properly stored in secure enclave\n5. Test authentication persistence across app restarts\n6. Perform security audit of key storage implementation\n7. Test error handling for authentication failures",
         "priority": "high",
-        "dependencies": [1, 2],
+        "dependencies": [
+          1,
+          2
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -114,7 +136,10 @@
         "details": "1. Design and implement onboarding screens\n2. Create form for birth date, time, and city input\n3. Implement client-side encryption for birth data\n4. Integrate with AstrologyAPI.com to fetch initial chart data\n5. Display Sun/Moon/Rising signs and today's cosmic snapshot\n6. Store encrypted profile data in Firestore\n\nCode example for client-side encryption:\n```typescript\n// encryption.service.ts\nimport * as CryptoJS from 'crypto-js';\nimport * as SecureStore from 'expo-secure-store';\n\nexport class EncryptionService {\n  private async getEncryptionKey(): Promise<string> {\n    let key = await SecureStore.getItemAsync('encryption_key');\n    if (!key) {\n      key = CryptoJS.lib.WordArray.random(256/8).toString();\n      await SecureStore.setItemAsync('encryption_key', key);\n    }\n    return key;\n  }\n  \n  async encryptData(data: any): Promise<string> {\n    const key = await this.getEncryptionKey();\n    return CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();\n  }\n  \n  async decryptData(encryptedData: string): Promise<any> {\n    const key = await this.getEncryptionKey();\n    const bytes = CryptoJS.AES.decrypt(encryptedData, key);\n    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));\n  }\n}\n```",
         "testStrategy": "1. Test form validation for birth information\n2. Verify client-side encryption/decryption works correctly\n3. Test AstrologyAPI integration with mock responses\n4. Verify proper display of astrological information\n5. Test data persistence in Firestore\n6. Verify encrypted data cannot be read without proper decryption\n7. Test the complete onboarding flow end-to-end",
         "priority": "high",
-        "dependencies": [2, 3],
+        "dependencies": [
+          2,
+          3
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -125,7 +150,10 @@
         "details": "1. Integrate NFC Manager library for NFC functionality\n2. Implement QR Code Scanner for QR code scanning\n3. Create QR code generation for user connections\n4. Develop NFC peer-to-peer communication\n5. Implement connection handshake protocol\n6. Create UI for connection methods selection\n7. Handle connection errors and timeouts\n\nCode example for NFC implementation:\n```typescript\n// nfc.service.ts\nimport NfcManager, { NfcTech, Ndef } from 'react-native-nfc-manager';\n\nexport class NfcService {\n  constructor() {\n    NfcManager.start();\n  }\n  \n  async initiateConnection(userId: string): Promise<void> {\n    try {\n      await NfcManager.requestTechnology(NfcTech.Ndef);\n      const bytes = Ndef.encodeMessage([\n        Ndef.textRecord(`astrophysicals:connect:${userId}`)\n      ]);\n      \n      await NfcManager.ndefHandler.writeNdefMessage(bytes);\n      await NfcManager.cancelTechnologyRequest();\n    } catch (error) {\n      console.error('NFC connection error:', error);\n      NfcManager.cancelTechnologyRequest();\n      throw error;\n    }\n  }\n  \n  async listenForConnection(): Promise<string> {\n    return new Promise(async (resolve, reject) => {\n      try {\n        await NfcManager.registerTagEvent(\n          tag => {\n            if (tag.ndefMessage && tag.ndefMessage.length > 0) {\n              const payload = Ndef.text.decodePayload(tag.ndefMessage[0].payload);\n              if (payload.startsWith('astrophysicals:connect:')) {\n                const userId = payload.split(':')[2];\n                resolve(userId);\n              }\n            }\n          },\n          'NFC connection failed',\n          { alertMessage: 'Ready to connect via NFC' }\n        );\n      } catch (error) {\n        reject(error);\n      }\n    });\n  }\n  \n  cleanup(): void {\n    NfcManager.cancelTechnologyRequest();\n    NfcManager.unregisterTagEvent();\n  }\n}\n```",
         "testStrategy": "1. Test QR code generation and scanning with mock data\n2. Verify NFC communication between devices\n3. Test connection handshake protocol with different scenarios\n4. Verify error handling for failed connections\n5. Test timeout handling\n6. Measure connection speed to ensure it meets the <5 second requirement\n7. Test on different device models to ensure compatibility",
         "priority": "high",
-        "dependencies": [1, 2],
+        "dependencies": [
+          1,
+          2
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -136,7 +164,10 @@
         "details": "1. Configure App Clip target in Xcode project\n2. Set up Instant App module for Android\n3. Create streamlined UI for mini-app experience\n4. Implement deep linking for App Clip/Instant App activation\n5. Develop handoff mechanism to full app installation\n6. Ensure core pairing functionality works in mini-app context\n7. Optimize bundle size for quick loading\n\nCode example for deep linking configuration:\n```typescript\n// app.json (Expo config)\n{\n  \"expo\": {\n    \"name\": \"Astrophysicals\",\n    \"slug\": \"astrophysicals\",\n    \"scheme\": \"astrophysicals\",\n    \"ios\": {\n      \"bundleIdentifier\": \"com.astrophysicals.app\",\n      \"appClips\": {\n        \"bundleIdentifier\": \"com.astrophysicals.app.Clip\",\n        \"associatedDomains\": [\"appclips:astrophysicals.app\"]\n      }\n    },\n    \"android\": {\n      \"package\": \"com.astrophysicals.app\",\n      \"intentFilters\": [\n        {\n          \"action\": \"VIEW\",\n          \"data\": [\n            {\n              \"scheme\": \"https\",\n              \"host\": \"*.astrophysicals.app\",\n              \"pathPrefix\": \"/connect\"\n            }\n          ],\n          \"category\": [\"BROWSABLE\", \"DEFAULT\"]\n        }\n      ]\n    }\n  }\n}\n```",
         "testStrategy": "1. Test App Clip build and deployment\n2. Verify Instant App functionality on Android devices\n3. Test deep linking from various sources\n4. Measure load time to ensure quick startup\n5. Verify core functionality works in mini-app context\n6. Test handoff to full app installation\n7. Verify data persistence during handoff\n8. Test on various device models and OS versions",
         "priority": "medium",
-        "dependencies": [1, 5],
+        "dependencies": [
+          1,
+          5
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -147,7 +178,10 @@
         "details": "1. Create API client for AstrologyAPI.com\n2. Implement birth chart calculation\n3. Develop synastry analysis between two charts\n4. Calculate compatibility scores based on planetary aspects\n5. Generate astrology-driven ice-breakers\n6. Implement daily horoscope and transit notifications\n7. Cache results to minimize API calls\n\nCode example:\n```typescript\n// astrology.service.ts\nimport axios from 'axios';\nimport { EncryptionService } from './encryption.service';\n\nexport class AstrologyService {\n  private apiClient;\n  private encryptionService: EncryptionService;\n  \n  constructor() {\n    this.apiClient = axios.create({\n      baseURL: 'https://json.astrologyapi.com/v1/',\n      headers: {\n        'Authorization': `Basic ${btoa(`${process.env.EXPO_PUBLIC_ASTROLOGY_API_USER}:${process.env.EXPO_PUBLIC_ASTROLOGY_API_KEY}`)}`\n      }\n    });\n    this.encryptionService = new EncryptionService();\n  }\n  \n  async getBirthChart(birthData: {\n    day: number;\n    month: number;\n    year: number;\n    hour: number;\n    min: number;\n    lat: number;\n    lon: number;\n    tzone: number;\n  }): Promise<any> {\n    try {\n      const response = await this.apiClient.post('/planets', birthData);\n      return response.data;\n    } catch (error) {\n      console.error('Error fetching birth chart:', error);\n      throw error;\n    }\n  }\n  \n  async calculateCompatibility(user1BirthData: any, user2BirthData: any): Promise<any> {\n    try {\n      const response = await this.apiClient.post('/synastry_aspects', {\n        p1_day: user1BirthData.day,\n        p1_month: user1BirthData.month,\n        p1_year: user1BirthData.year,\n        p1_hour: user1BirthData.hour,\n        p1_min: user1BirthData.min,\n        p1_lat: user1BirthData.lat,\n        p1_lon: user1BirthData.lon,\n        p1_tzone: user1BirthData.tzone,\n        p2_day: user2BirthData.day,\n        p2_month: user2BirthData.month,\n        p2_year: user2BirthData.year,\n        p2_hour: user2BirthData.hour,\n        p2_min: user2BirthData.min,\n        p2_lat: user2BirthData.lat,\n        p2_lon: user2BirthData.lon,\n        p2_tzone: user2BirthData.tzone,\n      });\n      \n      return {\n        aspects: response.data,\n        compatibilityScore: this.calculateScore(response.data),\n        iceBreakers: this.generateIceBreakers(response.data)\n      };\n    } catch (error) {\n      console.error('Error calculating compatibility:', error);\n      throw error;\n    }\n  }\n  \n  private calculateScore(aspects: any[]): number {\n    // Algorithm to calculate compatibility score based on aspects\n    // Implementation details...\n    return Math.floor(Math.random() * 100); // Placeholder\n  }\n  \n  private generateIceBreakers(aspects: any[]): string[] {\n    // Generate conversation starters based on astrological aspects\n    // Implementation details...\n    return [\n      'What's your favorite way to express your creativity?',\n      'How do you recharge when you're feeling drained?'\n    ]; // Placeholder\n  }\n}\n```",
         "testStrategy": "1. Test API client with mock responses\n2. Verify birth chart calculation with known examples\n3. Test synastry analysis between different chart combinations\n4. Verify compatibility score calculation algorithm\n5. Test ice-breaker generation for relevance and variety\n6. Measure API response times and optimize if needed\n7. Test caching mechanism for repeated calculations\n8. Verify error handling for API failures",
         "priority": "high",
-        "dependencies": [2, 4],
+        "dependencies": [
+          2,
+          4
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -158,7 +192,10 @@
         "details": "1. Integrate Aptos SDK for blockchain interactions\n2. Set up IPFS client using Pinata\n3. Create NFT metadata generation\n4. Implement NFT artwork generation based on astrological data\n5. Develop minting transaction submission\n6. Create Firebase Cloud Function for server-side minting\n7. Implement transaction monitoring and confirmation\n\nCode example:\n```typescript\n// nft.service.ts\nimport { AptosClient, AptosAccount, TxnBuilderTypes, BCS } from 'aptos';\nimport axios from 'axios';\nimport * as SecureStore from 'expo-secure-store';\n\nexport class NftService {\n  private aptosClient: AptosClient;\n  private pinataClient;\n  \n  constructor() {\n    this.aptosClient = new AptosClient('https://fullnode.mainnet.aptoslabs.com/v1');\n    this.pinataClient = axios.create({\n      baseURL: 'https://api.pinata.cloud',\n      headers: {\n        'pinata_api_key': process.env.EXPO_PUBLIC_PINATA_API_KEY,\n        'pinata_secret_api_key': process.env.EXPO_PUBLIC_PINATA_SECRET_KEY\n      }\n    });\n  }\n  \n  async mintConnectionNFT(\n    user1Address: string,\n    user2Address: string,\n    compatibilityData: any,\n    location: { latitude: number, longitude: number }\n  ): Promise<string> {\n    try {\n      // 1. Generate NFT metadata\n      const metadata = this.generateMetadata(user1Address, user2Address, compatibilityData, location);\n      \n      // 2. Upload metadata to IPFS\n      const ipfsHash = await this.uploadToIPFS(metadata);\n      \n      // 3. Mint NFT on Aptos blockchain\n      const txHash = await this.mintOnAptos(user1Address, user2Address, ipfsHash);\n      \n      return txHash;\n    } catch (error) {\n      console.error('Error minting NFT:', error);\n      throw error;\n    }\n  }\n  \n  private generateMetadata(user1Address: string, user2Address: string, compatibilityData: any, location: any): any {\n    return {\n      name: `Cosmic Connection: ${compatibilityData.signs.user1Sun} & ${compatibilityData.signs.user2Sun}`,\n      description: `A cosmic connection between two souls. Compatibility score: ${compatibilityData.compatibilityScore}`,\n      image: this.generateArtworkUrl(compatibilityData),\n      attributes: [\n        { trait_type: 'User1Sign', value: compatibilityData.signs.user1Sun },\n        { trait_type: 'User2Sign', value: compatibilityData.signs.user2Sun },\n        { trait_type: 'CompatibilityScore', value: compatibilityData.compatibilityScore },\n        { trait_type: 'MoonPhase', value: compatibilityData.moonPhase },\n        { trait_type: 'Location', value: `${location.latitude},${location.longitude}` },\n        { trait_type: 'Timestamp', value: Date.now() }\n      ]\n    };\n  }\n  \n  private async uploadToIPFS(metadata: any): Promise<string> {\n    const response = await this.pinataClient.post('/pinning/pinJSONToIPFS', metadata);\n    return response.data.IpfsHash;\n  }\n  \n  private async mintOnAptos(user1Address: string, user2Address: string, ipfsHash: string): Promise<string> {\n    // Implementation of Aptos NFT minting transaction\n    // This would typically be done via a Cloud Function for security\n    return 'transaction_hash_placeholder';\n  }\n  \n  private generateArtworkUrl(compatibilityData: any): string {\n    // Generate artwork based on astrological data\n    // This could call a separate service or API\n    return `https://astrophysicals.app/api/artwork?data=${encodeURIComponent(JSON.stringify(compatibilityData))}`;\n  }\n}\n```",
         "testStrategy": "1. Test NFT metadata generation with various inputs\n2. Verify IPFS uploads work correctly\n3. Test Aptos transaction creation and submission\n4. Verify NFT appears in user wallets after minting\n5. Test artwork generation for visual quality\n6. Measure end-to-end minting time to ensure it meets the <5 second requirement\n7. Test error handling and recovery\n8. Verify transaction monitoring and confirmation works correctly",
         "priority": "high",
-        "dependencies": [3, 7],
+        "dependencies": [
+          3,
+          7
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -169,7 +206,10 @@
         "details": "1. Design and implement timeline UI components\n2. Create Firestore data structure for timeline events\n3. Implement real-time updates using Firebase listeners\n4. Develop event categorization and filtering\n5. Create media attachment handling\n6. Implement pagination for efficient loading\n7. Add interaction capabilities (likes, comments)\n\nCode example:\n```typescript\n// timeline.service.ts\nimport { collection, query, where, orderBy, limit, getDocs, onSnapshot } from 'firebase/firestore';\nimport { db } from '../firebase';\n\nexport class TimelineService {\n  async getTimelineEvents(userId: string, page: number = 1, pageSize: number = 20): Promise<any[]> {\n    try {\n      const timelineRef = collection(db, 'timeline');\n      const q = query(\n        timelineRef,\n        where('participantIds', 'array-contains', userId),\n        orderBy('timestamp', 'desc'),\n        limit(page * pageSize)\n      );\n      \n      const snapshot = await getDocs(q);\n      return snapshot.docs.map(doc => ({\n        id: doc.id,\n        ...doc.data()\n      }));\n    } catch (error) {\n      console.error('Error fetching timeline events:', error);\n      throw error;\n    }\n  }\n  \n  subscribeToTimelineUpdates(userId: string, callback: (events: any[]) => void): () => void {\n    const timelineRef = collection(db, 'timeline');\n    const q = query(\n      timelineRef,\n      where('participantIds', 'array-contains', userId),\n      orderBy('timestamp', 'desc'),\n      limit(50)\n    );\n    \n    const unsubscribe = onSnapshot(q, (snapshot) => {\n      const events = snapshot.docs.map(doc => ({\n        id: doc.id,\n        ...doc.data()\n      }));\n      callback(events);\n    }, (error) => {\n      console.error('Timeline subscription error:', error);\n    });\n    \n    return unsubscribe;\n  }\n  \n  async addTimelineEvent(event: {\n    type: 'connection' | 'message' | 'nft' | 'media' | 'custom';\n    participantIds: string[];\n    content: any;\n    timestamp?: number;\n  }): Promise<string> {\n    try {\n      const timelineRef = collection(db, 'timeline');\n      const eventData = {\n        ...event,\n        timestamp: event.timestamp || Date.now()\n      };\n      \n      const docRef = await addDoc(timelineRef, eventData);\n      return docRef.id;\n    } catch (error) {\n      console.error('Error adding timeline event:', error);\n      throw error;\n    }\n  }\n}\n```",
         "testStrategy": "1. Test timeline event retrieval with mock data\n2. Verify real-time updates using Firebase emulator\n3. Test pagination with large datasets\n4. Verify event filtering and categorization\n5. Test media attachment handling\n6. Measure timeline loading performance\n7. Test interaction features (likes, comments)\n8. Verify offline support and sync capabilities",
         "priority": "medium",
-        "dependencies": [2, 8],
+        "dependencies": [
+          2,
+          8
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -180,7 +220,10 @@
         "details": "1. Design and implement chat UI components\n2. Create Firestore data structure for chat messages\n3. Implement real-time messaging using Firebase listeners\n4. Add support for image sharing and storage\n5. Implement reactions and message status indicators\n6. Create astrology-prompted conversation starters\n7. Add typing indicators and read receipts\n\nCode example:\n```typescript\n// chat.service.ts\nimport { collection, query, where, orderBy, limit, addDoc, onSnapshot, updateDoc, doc } from 'firebase/firestore';\nimport { ref, uploadBytes, getDownloadURL } from 'firebase/storage';\nimport { db, storage } from '../firebase';\n\nexport class ChatService {\n  async sendMessage(chatId: string, senderId: string, content: string, type: 'text' | 'image' = 'text'): Promise<string> {\n    try {\n      const messagesRef = collection(db, 'chats', chatId, 'messages');\n      const messageData = {\n        senderId,\n        content,\n        type,\n        timestamp: Date.now(),\n        status: 'sent',\n        reactions: {}\n      };\n      \n      const docRef = await addDoc(messagesRef, messageData);\n      \n      // Update last message in chat metadata\n      const chatRef = doc(db, 'chats', chatId);\n      await updateDoc(chatRef, {\n        lastMessage: content,\n        lastMessageTimestamp: messageData.timestamp,\n        lastMessageSenderId: senderId\n      });\n      \n      return docRef.id;\n    } catch (error) {\n      console.error('Error sending message:', error);\n      throw error;\n    }\n  }\n  \n  async uploadImage(chatId: string, senderId: string, uri: string): Promise<string> {\n    try {\n      const response = await fetch(uri);\n      const blob = await response.blob();\n      \n      const storageRef = ref(storage, `chats/${chatId}/${Date.now()}_${senderId}`);\n      await uploadBytes(storageRef, blob);\n      \n      const downloadURL = await getDownloadURL(storageRef);\n      await this.sendMessage(chatId, senderId, downloadURL, 'image');\n      \n      return downloadURL;\n    } catch (error) {\n      console.error('Error uploading image:', error);\n      throw error;\n    }\n  }\n  \n  subscribeToMessages(chatId: string, callback: (messages: any[]) => void): () => void {\n    const messagesRef = collection(db, 'chats', chatId, 'messages');\n    const q = query(\n      messagesRef,\n      orderBy('timestamp', 'desc'),\n      limit(50)\n    );\n    \n    const unsubscribe = onSnapshot(q, (snapshot) => {\n      const messages = snapshot.docs.map(doc => ({\n        id: doc.id,\n        ...doc.data()\n      }));\n      callback(messages.reverse());\n    }, (error) => {\n      console.error('Chat subscription error:', error);\n    });\n    \n    return unsubscribe;\n  }\n  \n  async addReaction(chatId: string, messageId: string, userId: string, reaction: string): Promise<void> {\n    try {\n      const messageRef = doc(db, 'chats', chatId, 'messages', messageId);\n      await updateDoc(messageRef, {\n        [`reactions.${userId}`]: reaction\n      });\n    } catch (error) {\n      console.error('Error adding reaction:', error);\n      throw error;\n    }\n  }\n  \n  getConversationStarters(compatibilityData: any): string[] {\n    // Generate conversation starters based on astrological compatibility\n    // This could be expanded with more sophisticated logic\n    const starters = [\n      `As a ${compatibilityData.signs.user1Sun}, what do you think about...`,\n      `Your ${compatibilityData.elements.user1Moon} moon might enjoy...`,\n      `With your Venus in ${compatibilityData.planets.user1Venus}, how do you express affection?`\n    ];\n    \n    return starters;\n  }\n}\n```",
         "testStrategy": "1. Test message sending and retrieval with mock data\n2. Verify real-time updates using Firebase emulator\n3. Test image upload and display\n4. Verify reactions functionality\n5. Test conversation starters for relevance\n6. Measure chat performance with large message history\n7. Test offline support and message queuing\n8. Verify chat notifications work correctly",
         "priority": "medium",
-        "dependencies": [2, 7],
+        "dependencies": [
+          2,
+          7
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -191,7 +234,10 @@
         "details": "1. Design and implement compatibility screen layout\n2. Create visual representation of synastry aspects\n3. Develop compatibility score visualization\n4. Implement ice-breaker card components\n5. Add animations for engaging user experience\n6. Create share functionality for compatibility results\n7. Implement NFT minting button and flow\n\nCode example:\n```tsx\n// CompatibilityScreen.tsx\nimport React, { useEffect, useState } from 'react';\nimport { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';\nimport { useRoute } from '@react-navigation/native';\nimport { AstrologyService } from '../services/astrology.service';\nimport { NftService } from '../services/nft.service';\nimport { CompatibilityChart } from '../components/CompatibilityChart';\nimport { IceBreaker } from '../components/IceBreaker';\nimport { ScoreCircle } from '../components/ScoreCircle';\nimport { useAuth } from '../hooks/useAuth';\n\nexport const CompatibilityScreen = () => {\n  const route = useRoute();\n  const { user1Data, user2Data } = route.params;\n  const { currentUser } = useAuth();\n  const [loading, setLoading] = useState(true);\n  const [compatibility, setCompatibility] = useState(null);\n  const [minting, setMinting] = useState(false);\n  const [mintedNft, setMintedNft] = useState(null);\n  \n  const astrologyService = new AstrologyService();\n  const nftService = new NftService();\n  \n  useEffect(() => {\n    const calculateCompatibility = async () => {\n      try {\n        const result = await astrologyService.calculateCompatibility(user1Data, user2Data);\n        setCompatibility(result);\n      } catch (error) {\n        console.error('Error calculating compatibility:', error);\n        // Handle error\n      } finally {\n        setLoading(false);\n      }\n    };\n    \n    calculateCompatibility();\n  }, [user1Data, user2Data]);\n  \n  const handleMintNft = async () => {\n    try {\n      setMinting(true);\n      const location = await getCurrentLocation();\n      \n      const txHash = await nftService.mintConnectionNFT(\n        currentUser.address,\n        user2Data.address,\n        compatibility,\n        location\n      );\n      \n      setMintedNft({\n        txHash,\n        timestamp: Date.now()\n      });\n    } catch (error) {\n      console.error('Error minting NFT:', error);\n      // Handle error\n    } finally {\n      setMinting(false);\n    }\n  };\n  \n  if (loading) {\n    return (\n      <View style={styles.loadingContainer}>\n        <ActivityIndicator size=\"large\" color=\"#8A2BE2\" />\n        <Text style={styles.loadingText}>Calculating cosmic compatibility...</Text>\n      </View>\n    );\n  }\n  \n  return (\n    <ScrollView style={styles.container}>\n      <View style={styles.header}>\n        <Text style={styles.title}>Cosmic Connection</Text>\n        <ScoreCircle score={compatibility.compatibilityScore} />\n      </View>\n      \n      <CompatibilityChart aspects={compatibility.aspects} />\n      \n      <View style={styles.section}>\n        <Text style={styles.sectionTitle}>Conversation Starters</Text>\n        {compatibility.iceBreakers.map((iceBreaker, index) => (\n          <IceBreaker key={index} text={iceBreaker} />\n        ))}\n      </View>\n      \n      <TouchableOpacity \n        style={[styles.mintButton, minting && styles.mintingButton]}\n        onPress={handleMintNft}\n        disabled={minting || mintedNft}\n      >\n        {minting ? (\n          <ActivityIndicator color=\"#fff\" />\n        ) : mintedNft ? (\n          <Text style={styles.buttonText}>NFT Minted! ✨</Text>\n        ) : (\n          <Text style={styles.buttonText}>Mint This Connection</Text>\n        )}\n      </TouchableOpacity>\n      \n      {mintedNft && (\n        <View style={styles.nftInfo}>\n          <Text style={styles.nftText}>Transaction: {mintedNft.txHash}</Text>\n          <TouchableOpacity>\n            <Text style={styles.viewNftText}>View in Wallet</Text>\n          </TouchableOpacity>\n        </View>\n      )}\n    </ScrollView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  // Styles implementation\n});\n```",
         "testStrategy": "1. Test UI rendering with various compatibility data\n2. Verify synastry visualization accuracy\n3. Test compatibility score display\n4. Verify ice-breaker components display correctly\n5. Test animations and transitions\n6. Verify NFT minting flow works end-to-end\n7. Test share functionality\n8. Verify UI responsiveness on different screen sizes",
         "priority": "high",
-        "dependencies": [7, 8],
+        "dependencies": [
+          7,
+          8
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -202,7 +248,10 @@
         "details": "1. Integrate in-app purchase system (RevenueCat recommended)\n2. Create subscription tiers and pricing\n3. Implement feature gating based on subscription status\n4. Develop premium NFT styles and collectible badges\n5. Create subscription management UI\n6. Implement receipt validation and subscription status tracking\n7. Add restore purchases functionality\n\nCode example:\n```typescript\n// subscription.service.ts\nimport { Platform } from 'react-native';\nimport Purchases, { PurchasesPackage, CustomerInfo } from 'react-native-purchases';\n\nexport class SubscriptionService {\n  constructor() {\n    Purchases.setDebugLogsEnabled(process.env.NODE_ENV === 'development');\n    \n    Purchases.setup(Platform.select({\n      ios: process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY,\n      android: process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY\n    }));\n  }\n  \n  async getOfferings(): Promise<PurchasesPackage[]> {\n    try {\n      const offerings = await Purchases.getOfferings();\n      return offerings.current?.availablePackages || [];\n    } catch (error) {\n      console.error('Error fetching offerings:', error);\n      throw error;\n    }\n  }\n  \n  async purchasePackage(packageToPurchase: PurchasesPackage): Promise<CustomerInfo> {\n    try {\n      const { customerInfo } = await Purchases.purchasePackage(packageToPurchase);\n      return customerInfo;\n    } catch (error) {\n      console.error('Error purchasing package:', error);\n      throw error;\n    }\n  }\n  \n  async restorePurchases(): Promise<CustomerInfo> {\n    try {\n      const { customerInfo } = await Purchases.restorePurchases();\n      return customerInfo;\n    } catch (error) {\n      console.error('Error restoring purchases:', error);\n      throw error;\n    }\n  }\n  \n  async getCustomerInfo(): Promise<CustomerInfo> {\n    try {\n      const customerInfo = await Purchases.getCustomerInfo();\n      return customerInfo;\n    } catch (error) {\n      console.error('Error getting customer info:', error);\n      throw error;\n    }\n  }\n  \n  async checkPremiumEntitlement(): Promise<boolean> {\n    try {\n      const customerInfo = await Purchases.getCustomerInfo();\n      return customerInfo.entitlements.active['premium'] !== undefined;\n    } catch (error) {\n      console.error('Error checking premium entitlement:', error);\n      return false;\n    }\n  }\n  \n  async purchaseNftStyle(styleId: string): Promise<void> {\n    try {\n      // Implementation for purchasing individual NFT styles\n      // This would use Purchases.purchaseProduct() for non-subscription IAPs\n    } catch (error) {\n      console.error('Error purchasing NFT style:', error);\n      throw error;\n    }\n  }\n}\n```",
         "testStrategy": "1. Test subscription tier offerings display\n2. Verify purchase flow with sandbox testing\n3. Test feature gating for free vs premium users\n4. Verify receipt validation and subscription status tracking\n5. Test restore purchases functionality\n6. Verify premium NFT styles are correctly applied\n7. Test subscription management UI\n8. Verify analytics tracking for subscription events",
         "priority": "medium",
-        "dependencies": [8, 11],
+        "dependencies": [
+          8,
+          11
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -213,7 +262,9 @@
         "details": "1. Set up Strapi project with required dependencies\n2. Configure content types for moderation needs\n3. Implement role-based access control (Admin, Moderator, Astrologer, Support)\n4. Create API endpoints for admin actions\n5. Set up audit logging for all actions\n6. Containerize Strapi for Google Cloud Run deployment\n7. Configure authentication and security\n\nCode example for Strapi configuration:\n```javascript\n// config/plugins.js (Strapi configuration)\nmodule.exports = ({ env }) => ({\n  'users-permissions': {\n    config: {\n      jwtSecret: env('JWT_SECRET'),\n    },\n  },\n  'audit-logs': {\n    enabled: true,\n    config: {\n      enabledCollections: ['user', 'report', 'content-moderation', 'nft'],\n      methods: ['create', 'update', 'delete'],\n      redactedFields: ['password', 'resetPasswordToken'],\n    },\n  },\n  upload: {\n    config: {\n      provider: 'google-cloud-storage',\n      providerOptions: {\n        bucketName: env('GCS_BUCKET_NAME'),\n        publicFiles: true,\n        uniform: false,\n        serviceAccount: JSON.parse(env('GCS_SERVICE_ACCOUNT')),\n      },\n    },\n  },\n});\n\n// api/report/content-types/report/schema.json\n{\n  \"kind\": \"collectionType\",\n  \"collectionName\": \"reports\",\n  \"info\": {\n    \"singularName\": \"report\",\n    \"pluralName\": \"reports\",\n    \"displayName\": \"User Report\"\n  },\n  \"options\": {\n    \"draftAndPublish\": false\n  },\n  \"attributes\": {\n    \"reportedUser\": {\n      \"type\": \"string\",\n      \"required\": true\n    },\n    \"reportingUser\": {\n      \"type\": \"string\",\n      \"required\": true\n    },\n    \"reason\": {\n      \"type\": \"enumeration\",\n      \"enum\": [\n        \"inappropriate_content\",\n        \"harassment\",\n        \"spam\",\n        \"fake_profile\",\n        \"other\"\n      ],\n      \"required\": true\n    },\n    \"details\": {\n      \"type\": \"text\"\n    },\n    \"status\": {\n      \"type\": \"enumeration\",\n      \"enum\": [\n        \"pending\",\n        \"investigating\",\n        \"resolved\",\n        \"dismissed\"\n      ],\n      \"default\": \"pending\",\n      \"required\": true\n    },\n    \"moderatorNotes\": {\n      \"type\": \"text\"\n    },\n    \"resolvedBy\": {\n      \"type\": \"relation\",\n      \"relation\": \"oneToOne\",\n      \"target\": \"admin::user\"\n    }\n  }\n}\n```\n\nDockerfile for Strapi:\n```dockerfile\nFROM node:18-alpine\n\nRUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1\n\nWORKDIR /opt/app\n\nCOPY package.json yarn.lock ./\n\nRUN yarn install --frozen-lockfile\n\nCOPY . .\n\nRUN yarn build\n\nEXPOSE 1337\n\nCMD [\"yarn\", \"start\"]\n```",
         "testStrategy": "1. Test Strapi admin interface functionality\n2. Verify role-based access control works correctly\n3. Test content moderation workflows\n4. Verify audit logging captures all required actions\n5. Test API endpoints for admin actions\n6. Verify containerization works correctly\n7. Test Google Cloud Run deployment\n8. Verify security measures and authentication",
         "priority": "medium",
-        "dependencies": [2],
+        "dependencies": [
+          2
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -224,7 +275,11 @@
         "details": "1. Configure Firebase Cloud Messaging (FCM)\n2. Implement device token registration and management\n3. Create Cloud Functions for scheduled horoscope delivery\n4. Develop notification handling for foreground and background states\n5. Implement deep linking from notifications\n6. Create notification preferences UI\n7. Set up transit notification triggers based on astrological events\n\nCode example:\n```typescript\n// notification.service.ts\nimport { Platform } from 'react-native';\nimport * as Device from 'expo-device';\nimport * as Notifications from 'expo-notifications';\nimport { getMessaging, getToken, onMessage } from 'firebase/messaging';\nimport { doc, setDoc, getDoc } from 'firebase/firestore';\nimport { db } from '../firebase';\nimport { AstrologyService } from './astrology.service';\n\nexport class NotificationService {\n  private astrologyService: AstrologyService;\n  \n  constructor() {\n    this.astrologyService = new AstrologyService();\n    \n    // Configure notification behavior\n    Notifications.setNotificationHandler({\n      handleNotification: async () => ({\n        shouldShowAlert: true,\n        shouldPlaySound: true,\n        shouldSetBadge: true,\n      }),\n    });\n    \n    // Listen for foreground notifications\n    onMessage(getMessaging(), (message) => {\n      Notifications.scheduleNotificationAsync({\n        content: {\n          title: message.notification.title,\n          body: message.notification.body,\n          data: message.data,\n        },\n        trigger: null,\n      });\n    });\n  }\n  \n  async registerForPushNotifications(userId: string): Promise<string> {\n    if (!Device.isDevice) {\n      throw new Error('Push notifications are not supported in the simulator');\n    }\n    \n    const { status: existingStatus } = await Notifications.getPermissionsAsync();\n    let finalStatus = existingStatus;\n    \n    if (existingStatus !== 'granted') {\n      const { status } = await Notifications.requestPermissionsAsync();\n      finalStatus = status;\n    }\n    \n    if (finalStatus !== 'granted') {\n      throw new Error('Permission not granted for push notifications');\n    }\n    \n    let token;\n    \n    if (Platform.OS === 'android') {\n      // For Android, we use Firebase Cloud Messaging\n      token = await getToken(getMessaging(), {\n        vapidKey: process.env.EXPO_PUBLIC_FCM_VAPID_KEY,\n      });\n    } else {\n      // For iOS, we use APNs via Expo\n      const { data } = await Notifications.getExpoPushTokenAsync();\n      token = data;\n    }\n    \n    // Store the token in Firestore\n    await setDoc(doc(db, 'users', userId), {\n      pushToken: token,\n      platform: Platform.OS,\n      updatedAt: Date.now(),\n    }, { merge: true });\n    \n    return token;\n  }\n  \n  async scheduleHoroscopeNotification(userId: string): Promise<void> {\n    try {\n      // Get user's birth data\n      const userDoc = await getDoc(doc(db, 'users', userId));\n      const userData = userDoc.data();\n      \n      if (!userData.birthData) {\n        return;\n      }\n      \n      // Get today's horoscope\n      const horoscope = await this.astrologyService.getDailyHoroscope(userData.birthData);\n      \n      // Schedule notification for preferred time (default 9 AM)\n      const preferredTime = userData.notificationPreferences?.horoscopeTime || '09:00';\n      const [hours, minutes] = preferredTime.split(':').map(Number);\n      \n      const trigger = new Date();\n      trigger.setHours(hours, minutes, 0, 0);\n      \n      // If time has passed for today, schedule for tomorrow\n      if (trigger < new Date()) {\n        trigger.setDate(trigger.getDate() + 1);\n      }\n      \n      await Notifications.scheduleNotificationAsync({\n        content: {\n          title: `Daily Horoscope for ${userData.birthData.sunSign}`,\n          body: horoscope.prediction,\n          data: { type: 'horoscope', userId },\n        },\n        trigger,\n      });\n    } catch (error) {\n      console.error('Error scheduling horoscope notification:', error);\n    }\n  }\n  \n  async sendChatNotification(recipientId: string, senderId: string, message: string): Promise<void> {\n    try {\n      // Get recipient's user data\n      const recipientDoc = await getDoc(doc(db, 'users', recipientId));\n      const recipientData = recipientDoc.data();\n      \n      if (!recipientData.pushToken) {\n        return;\n      }\n      \n      // Get sender's display name\n      const senderDoc = await getDoc(doc(db, 'users', senderId));\n      const senderData = senderDoc.data();\n      \n      // Send notification via Cloud Function\n      // This would typically be handled by a Cloud Function triggered by new chat messages\n    } catch (error) {\n      console.error('Error sending chat notification:', error);\n    }\n  }\n}\n```",
         "testStrategy": "1. Test push notification registration\n2. Verify FCM token storage and management\n3. Test scheduled horoscope delivery\n4. Verify notification handling in foreground and background\n5. Test deep linking from notifications\n6. Verify notification preferences are respected\n7. Test transit notifications for accuracy\n8. Measure notification delivery times",
         "priority": "medium",
-        "dependencies": [2, 7, 10],
+        "dependencies": [
+          2,
+          7,
+          10
+        ],
         "status": "pending",
         "subtasks": []
       },
@@ -235,14 +290,19 @@
         "details": "1. Integrate Firebase Analytics\n2. Set up custom event tracking for key user actions\n3. Implement conversion funnels for critical flows\n4. Configure Firebase Performance Monitoring\n5. Set up crash reporting with Firebase Crashlytics\n6. Create dashboard for key metrics\n7. Implement A/B testing framework\n\nCode example:\n```typescript\n// analytics.service.ts\nimport { getAnalytics, logEvent, setUserProperties } from 'firebase/analytics';\nimport { getPerformance, trace } from 'firebase/performance';\nimport { app } from '../firebase';\n\nexport class AnalyticsService {\n  private analytics;\n  private performance;\n  \n  constructor() {\n    this.analytics = getAnalytics(app);\n    this.performance = getPerformance(app);\n  }\n  \n  setUserProfile(userId: string, properties: Record<string, string>): void {\n    setUserProperties(this.analytics, properties);\n  }\n  \n  trackScreenView(screenName: string): void {\n    logEvent(this.analytics, 'screen_view', {\n      firebase_screen: screenName,\n    });\n  }\n  \n  trackConnection(connectionType: 'qr' | 'nfc', successfulPairing: boolean, timeToComplete: number): void {\n    logEvent(this.analytics, 'connection_attempt', {\n      connection_type: connectionType,\n      successful: successfulPairing,\n      time_to_complete: timeToComplete,\n    });\n  }\n  \n  trackNftMint(successful: boolean, timeToComplete: number): void {\n    logEvent(this.analytics, 'nft_mint', {\n      successful,\n      time_to_complete: timeToComplete,\n    });\n  }\n  \n  trackSubscription(tier: string, price: number, successful: boolean): void {\n    logEvent(this.analytics, 'subscription_purchase', {\n      tier,\n      price,\n      successful,\n    });\n  }\n  \n  trackAppClipConversion(installed: boolean): void {\n    logEvent(this.analytics, 'app_clip_conversion', {\n      installed,\n    });\n  }\n  \n  startTrace(traceName: string): any {\n    return trace(this.performance, traceName);\n  }\n  \n  // Custom conversion funnel tracking\n  trackConnectionFunnel(stage: 'initiated' | 'paired' | 'compatibility_viewed' | 'nft_minted'): void {\n    logEvent(this.analytics, 'connection_funnel', {\n      stage,\n      timestamp: Date.now(),\n    });\n  }\n  \n  // A/B testing variant tracking\n  trackExperimentVariant(experimentId: string, variant: string): void {\n    logEvent(this.analytics, 'experiment_impression', {\n      experiment_id: experimentId,\n      variant,\n    });\n  }\n}\n```",
         "testStrategy": "1. Verify Firebase Analytics integration\n2. Test custom event tracking for key user actions\n3. Verify conversion funnel tracking\n4. Test Performance Monitoring for critical operations\n5. Verify crash reporting works correctly\n6. Test A/B testing framework\n7. Verify dashboard displays correct metrics\n8. Test analytics in both development and production environments",
         "priority": "medium",
-        "dependencies": [2, 8, 11, 12],
+        "dependencies": [
+          2,
+          8,
+          11,
+          12
+        ],
         "status": "pending",
         "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T07:27:58.812Z",
+      "updated": "2025-07-01T07:28:57.522Z",
       "description": "Tasks for master context"
     }
   }
