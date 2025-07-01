@@ -225,7 +225,7 @@
             "description": "Install and configure Aptos SDK and related dependencies required for authentication and wallet functionality.",
             "dependencies": [],
             "details": "Install required packages: aptos, expo-secure-store, and other authentication-related libraries. Configure the SDK with appropriate network endpoints (devnet/testnet/mainnet). Set up basic service structure for wallet and authentication services.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Verify SDK initialization and connection to Aptos network with a simple query test."
           },
           {
@@ -236,7 +236,7 @@
               1
             ],
             "details": "Implement a KeyStorageService class using expo-secure-store with methods for storing, retrieving, and deleting private keys. Ensure keys are stored with appropriate security options (WHEN_UNLOCKED). Add encryption layer before storing sensitive data. Include error handling for storage failures.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Test storing and retrieving mock keys to verify the secure storage functionality works correctly."
           },
           {
@@ -247,7 +247,7 @@
               1
             ],
             "details": "Implement functions to generate random mnemonics of appropriate strength (12/24 words). Add validation to ensure mnemonics conform to BIP-39 standards. Create functions to convert between mnemonics and seed phrases. Include internationalization support for different language wordlists if needed.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Test mnemonic generation, validation, and conversion to ensure they meet cryptographic standards."
           },
           {
@@ -510,7 +510,7 @@
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T08:10:37.715Z",
+      "updated": "2025-07-01T08:36:32.816Z",
       "description": "Tasks for master context"
     }
   }

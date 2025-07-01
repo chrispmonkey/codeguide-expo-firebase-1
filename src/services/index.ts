@@ -1,3 +1,4 @@
 // Export all services from this directory
 export { WalletService } from './wallet.service';
-export { AuthService } from './auth.service'; 
+export { AuthService } from './auth.service';
+export { KeyStorageService } from './keyStorage.service'; 
