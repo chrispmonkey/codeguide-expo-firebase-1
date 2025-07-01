@@ -40,7 +40,6 @@ Before you begin, ensure you have the following:
    ```
 
 3. **Environment Variables Setup**
-
    - Copy the `.env.example` file to `.env`:
      ```bash
      cp .env.example .env
@@ -97,14 +96,38 @@ FIREBASE_APP_ID=your_firebase_app_id
 ## Project Structure
 
 ```
-codeguide-expo-firebase/
-├── app/                # Expo Router pages
-├── components/         # React Native components
-├── constants/         # Constants and configurations
-├── hooks/             # Custom hooks
-├── assets/            # Static assets
-└── documentation/     # Generated documentation from CodeGuide
+astrophysicals/
+├── app/                # Expo Router pages (file-based routing)
+│   ├── (tabs)/        # Tab navigation group
+│   ├── index.tsx      # Home screen
+│   ├── pairing.tsx    # Re-exports from lib/screens
+│   └── compatibility.tsx # Re-exports from lib/screens
+├── components/         # Reusable React Native components
+│   └── ui/            # UI design system components
+├── lib/               # Business logic and utilities
+│   ├── screens/       # Screen components (separated from routing)
+│   ├── services/      # API and external service integrations
+│   └── utils/         # Utility functions
+├── config/            # Configuration files
+│   └── firebase.ts    # Firebase setup
+├── constants/         # App constants and configurations
+├── hooks/             # Custom React hooks
+├── types/             # TypeScript type definitions
+├── assets/            # Static assets (images, fonts)
+├── documentation/     # Project documentation
+└── .tools/            # AI/Development tool configurations
+    ├── .taskmaster/   # Task management system
+    ├── .cursor/       # Cursor AI settings
+    └── ...            # Other development tools
 ```
+
+### Architectural Patterns
+
+1. **Screen Organization**: Screens are implemented in `lib/screens/` for business logic separation, then re-exported in `app/` for Expo Router integration. This allows for better code organization and potential reuse.
+
+2. **Environment Configuration**: Separate `.env.development` and `.env.production` files for different environments.
+
+3. **Development Tools**: AI-assisted development tools are organized in `.tools/` directory to keep the root clean while maintaining functionality.
 
 ## Documentation Setup
 

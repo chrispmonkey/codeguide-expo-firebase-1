@@ -1,0 +1,237 @@
+{
+  "meta": {
+    "generatedAt": "2025-07-01T01:50:11.488Z",
+    "tasksAnalyzed": 28,
+    "totalTasks": 28,
+    "analysisCount": 28,
+    "thresholdScore": 5,
+    "projectName": "Taskmaster",
+    "usedResearch": true
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 26,
+      "taskTitle": "Setup React Native Project with Expo",
+      "complexityScore": 4,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the React Native project setup with Expo into specific steps, including dependency installation, environment configuration, and folder structure creation.",
+      "reasoning": "This task involves standard project setup procedures but requires attention to detail in configuring multiple dependencies and establishing the project structure."
+    },
+    {
+      "taskId": 27,
+      "taskTitle": "Implement Sign In with Aptos (SIWA) Authentication",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Detail the steps for implementing SIWA authentication, including SDK integration, secure storage implementation, and Firebase Authentication setup.",
+      "reasoning": "This task is complex due to the integration of multiple systems (Aptos SDK, secure storage, Firebase) and the need for robust security measures in handling authentication."
+    },
+    {
+      "taskId": 28,
+      "taskTitle": "Design and Implement Onboarding Flow",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the onboarding flow implementation into UI design, form validation, client-side encryption, and data storage steps.",
+      "reasoning": "This task involves both frontend and backend work, with added complexity due to the need for client-side encryption and GDPR compliance."
+    },
+    {
+      "taskId": 29,
+      "taskTitle": "Develop QR Code Pairing Mechanism",
+      "complexityScore": 5,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Outline the steps for implementing QR code generation, scanning, and the pairing protocol, including security considerations.",
+      "reasoning": "While QR code functionality is relatively straightforward, the custom pairing protocol and security considerations add moderate complexity."
+    },
+    {
+      "taskId": 30,
+      "taskTitle": "Implement NFC Tap Pairing",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Detail the steps for implementing NFC functionality, including device compatibility checks and fallback mechanisms.",
+      "reasoning": "NFC implementation can be tricky due to device-specific considerations and the need for robust fallback options."
+    },
+    {
+      "taskId": 31,
+      "taskTitle": "Integrate Third-party Astrology API",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the API integration process, including client implementation, data parsing, caching, and error handling strategies.",
+      "reasoning": "This task involves complex data handling, potential performance optimizations, and robust error management for a critical app feature."
+    },
+    {
+      "taskId": 32,
+      "taskTitle": "Develop Instant NFT Minting on Aptos",
+      "complexityScore": 9,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Outline the steps for implementing NFT minting, including blockchain interactions, metadata generation, storage solutions, and offline handling.",
+      "reasoning": "This is a highly complex task involving blockchain technology, distributed storage systems, and handling of offline scenarios."
+    },
+    {
+      "taskId": 33,
+      "taskTitle": "Create AI-generated NFT Art System",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Detail the process of integrating AI art generation, including API setup, prompt creation, and optimization for mobile performance.",
+      "reasoning": "This task combines complex AI integration with performance optimization challenges for mobile devices."
+    },
+    {
+      "taskId": 34,
+      "taskTitle": "Implement Real-time Chat Feature",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the chat implementation into real-time data handling, UI development, media sharing, and chat-specific features like typing indicators.",
+      "reasoning": "Real-time features are inherently complex, and this task involves multiple components including media handling and UI considerations."
+    },
+    {
+      "taskId": 35,
+      "taskTitle": "Develop Astrology-driven Chat Prompts",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Outline the steps for creating an astrology-based prompt system, including algorithm development, database creation, and UI integration.",
+      "reasoning": "This task requires combining astrological knowledge with algorithmic design and seamless UI integration."
+    },
+    {
+      "taskId": 36,
+      "taskTitle": "Create Connection Chronicle Timeline",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the timeline feature implementation, including UI component design, data management, and performance optimization strategies.",
+      "reasoning": "This task involves complex UI work combined with efficient data handling and performance considerations for potentially large datasets."
+    },
+    {
+      "taskId": 37,
+      "taskTitle": "Develop Admin Portal using Strapi",
+      "complexityScore": 7,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Detail the steps for setting up Strapi, including deployment, role configuration, custom plugin development, and security measures.",
+      "reasoning": "This task involves backend development, custom plugin creation, and implementing robust security measures, adding significant complexity."
+    },
+    {
+      "taskId": 38,
+      "taskTitle": "Implement Monetization Features",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the implementation of in-app purchases, including platform-specific integrations, subscription logic, and receipt validation.",
+      "reasoning": "Monetization features are critical and complex, involving platform-specific implementations and secure financial transactions."
+    },
+    {
+      "taskId": 39,
+      "taskTitle": "Setup Push Notifications System",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Outline the steps for implementing push notifications, including FCM setup, notification categories, and server-side logic for automated notifications.",
+      "reasoning": "While push notification SDKs simplify implementation, coordinating different notification types and ensuring reliable delivery adds complexity."
+    },
+    {
+      "taskId": 40,
+      "taskTitle": "Implement App Clip (iOS) and Instant App (Android)",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Detail the process of creating lightweight app versions, including streamlined onboarding and ensuring seamless transition to full app installation.",
+      "reasoning": "This task requires platform-specific knowledge and careful feature selection to create functional mini-versions of the app, adding significant complexity."
+    },
+    {
+      "taskId": 41,
+      "taskTitle": "Develop Offline Mode and Data Syncing",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the implementation of offline functionality, including local storage, sync services, and conflict resolution strategies.",
+      "reasoning": "Offline functionality and data syncing involve complex state management and potential conflict resolution scenarios."
+    },
+    {
+      "taskId": 42,
+      "taskTitle": "Implement Dark Mode and UI Theming",
+      "complexityScore": 5,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Outline the steps for implementing dark mode and a theming system, including detection, transitions, and ensuring theme consistency across the app.",
+      "reasoning": "While not overly complex, this task requires careful consideration of UI components and state management across the entire app."
+    },
+    {
+      "taskId": 43,
+      "taskTitle": "Implement GDPR and CCPA Compliance Features",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Detail the implementation of data privacy features, including user controls, data export, and secure deletion processes.",
+      "reasoning": "Compliance features involve complex data handling processes and must be implemented with utmost care to meet legal requirements."
+    },
+    {
+      "taskId": 44,
+      "taskTitle": "Develop Connection Compatibility Score Algorithm",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the development of the compatibility algorithm, including astrological factor weighting and score visualization.",
+      "reasoning": "This task requires in-depth astrological knowledge combined with algorithm design and data visualization challenges."
+    },
+    {
+      "taskId": 45,
+      "taskTitle": "Implement Secure Birth Data Storage",
+      "complexityScore": 8,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Outline the steps for implementing secure data storage, including encryption, key management, and secure data retrieval processes.",
+      "reasoning": "This task involves critical security implementations and requires careful handling of sensitive user data."
+    },
+    {
+      "taskId": 46,
+      "taskTitle": "Create User Profile and Settings Screens",
+      "complexityScore": 5,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Detail the implementation of user profile and settings screens, including UI design, data management, and real-time updates.",
+      "reasoning": "While relatively straightforward, this task requires attention to user experience and efficient data handling."
+    },
+    {
+      "taskId": 47,
+      "taskTitle": "Implement Error Handling and Crash Reporting",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Break down the implementation of error handling and crash reporting, including integration of reporting tools and creation of user-friendly error flows.",
+      "reasoning": "This task is critical for app stability and requires careful consideration of various error scenarios and user communication."
+    },
+    {
+      "taskId": 48,
+      "taskTitle": "Develop Analytics and User Engagement Tracking",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Outline the implementation of analytics tracking, including event definition, dashboard creation, and privacy-compliant data collection.",
+      "reasoning": "While analytics SDKs simplify implementation, defining meaningful events and ensuring privacy compliance adds complexity."
+    },
+    {
+      "taskId": 49,
+      "taskTitle": "Implement App Performance Optimization",
+      "complexityScore": 9,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Detail the steps for optimizing app performance, including profiling, render optimization, and network request efficiency.",
+      "reasoning": "Performance optimization is highly complex, requiring deep understanding of React Native internals and various optimization techniques."
+    },
+    {
+      "taskId": 50,
+      "taskTitle": "Implement Continuous Integration and Deployment (CI/CD)",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the setup of CI/CD pipelines, including automated testing, code quality checks, and deployment processes.",
+      "reasoning": "Setting up robust CI/CD involves multiple tools and processes, requiring careful configuration and testing."
+    },
+    {
+      "taskId": 51,
+      "taskTitle": "Create User Documentation and Help Center",
+      "complexityScore": 4,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Outline the creation of user documentation, including guide writing, help center implementation, and support system integration.",
+      "reasoning": "While not technically complex, this task requires comprehensive understanding of app features and clear communication skills."
+    },
+    {
+      "taskId": 52,
+      "taskTitle": "Implement App Store Optimization (ASO) Strategy",
+      "complexityScore": 5,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "Detail the steps for implementing ASO, including keyword research, asset creation, and strategy for encouraging user reviews.",
+      "reasoning": "ASO requires market research and creative skills, with moderate complexity in implementation and tracking."
+    },
+    {
+      "taskId": 53,
+      "taskTitle": "Conduct User Acceptance Testing (UAT)",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the UAT process, including test plan creation, tester recruitment, feedback collection, and issue prioritization.",
+      "reasoning": "UAT involves coordinating multiple stakeholders and comprehensive testing scenarios, adding significant complexity to ensure thorough app validation."
+    }
+  ]
+}

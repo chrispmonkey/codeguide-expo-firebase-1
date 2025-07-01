@@ -1,0 +1,169 @@
+# Astrophysicals - Product Requirements Document (PRD)
+
+## 1. Project Overview
+
+Astrophysicals is a React Native mobile app that turns real-world meetups into instant astrological experiences and digital keepsakes. When two (or more) people physically tap phones (via NFC) or scan QR codes, the app computes a compatibility snapshot from their birth charts — complete with fun ice-breakers and a compatibility score — then mints a one-of-a-kind NFT on the Aptos blockchain.
+
+**Key Value Propositions:**
+- Instant astrology-driven readout at the speed of real-world connection
+- Long-term engagement via Connection Chronicle timeline and in-app chat
+- Organic growth through App Clips (iOS) and Instant Apps (Android)
+- Digital keepsakes as tradeable NFT assets
+
+**Success Criteria for v1:**
+- Sub-5-second pairing → insight → NFT minting
+- Seamless App Clip hand-off
+- Minimum viable chat and timeline experience
+- Initial monetization model (free tier + premium subscription)
+
+## 2. Core Features & User Stories
+
+### Authentication & Wallets
+- As a user, I want to sign in with Aptos (SIWA) to get a non-custodial wallet
+- As a user, I want manual wallet creation with mnemonic backup fallback
+- As a user, I want my private keys stored in the device's secure enclave
+
+### Onboarding & Profile Setup
+- As a user, I want to enter my birth date, time, and city for astrological calculations
+- As a user, I want my birth data encrypted client-side for privacy
+- As a user, I want to see my Sun/Moon/Rising signs and today's cosmic snapshot
+
+### Connection & Pairing
+- As a user, I want to display a QR code for others to scan
+- As a user, I want to scan QR codes to connect with others
+- As a user, I want to tap phones (NFC) for quick pairing
+- As a user, I want App Clip/Instant App support for users without the full app
+
+### Astrological Insights
+- As a user, I want instant compatibility readings when connecting
+- As a user, I want to see synastry analysis and compatibility scores
+- As a user, I want astrology-driven ice-breakers and conversation starters
+- As a user, I want daily horoscopes and transit notifications
+
+### Instant NFT Minting
+- As a user, I want to mint NFTs instantly after making connections
+- As a user, I want NFTs to capture the moment (signs, moon phase, timestamp, location)
+- As a user, I want NFTs stored on Aptos blockchain with IPFS metadata
+- As a user, I want NFTs to appear in my crypto wallet
+
+### Social Features
+- As a user, I want real-time chat with other connections
+- As a user, I want to share images and reactions in chat
+- As a user, I want astrology-prompted conversation starters
+- As a user, I want a Connection Chronicle timeline of events and media
+
+### Admin & Moderation
+- As an admin, I want to manage content and moderate user reports
+- As an admin, I want role-based access control (Admin, Moderator, Astrologer, Support)
+- As an admin, I want audit logs for all actions
+
+## 3. Technical Requirements
+
+### Tech Stack
+- **Frontend:** React Native + Expo, TypeScript
+- **Routing:** Expo Router for navigation
+- **Backend:** Firebase (Firestore, Auth, Functions, Storage, FCM)
+- **Admin Interface:** Strapi on Google Cloud Run
+- **Blockchain:** Aptos (testnet → mainnet)
+- **Storage:** IPFS (Pinata) + Firebase CDN fallback
+- **Astrology API:** AstrologyAPI.com for birth charts and synastry
+- **Development:** Node.js v20.2.1, Yarn, Expo CLI v7.14.0
+
+### Key Dependencies
+- React Navigation v6 for navigation
+- Firebase SDK for backend services
+- Aptos SDK for blockchain interactions
+- NFC Manager for NFC functionality
+- QR Code Scanner for QR code scanning
+- Axios for API calls
+
+### Performance Requirements
+- Pairing → insight → NFT mint in ≤5 seconds
+- UI response <200ms for core screens
+- Chat latency <1 second
+- Offline support with sync capabilities
+
+### Security & Privacy
+- Client-side encryption of birth data
+- Secure enclave storage for private keys
+- City-level location only (no precise GPS)
+- GDPR-compliant data handling
+- Firebase security rules enforcement
+
+## 4. Implementation Phases
+
+### Phase 1: Environment Setup
+1. Node.js v20.2.1 and Yarn installation
+2. Expo CLI v7.14.0 global installation
+3. React Native project initialization with Expo TypeScript template
+4. Git repository initialization
+5. Development tooling setup (ESLint, Prettier, TypeScript)
+
+### Phase 2: Frontend Development
+1. React Navigation setup with proper routing
+2. NFC and QR scanning library integration
+3. Pairing screen with QR/NFC functionality
+4. Astrology API client setup with Axios
+5. Compatibility screen with synastry display
+6. Aptos wallet SDK integration
+7. Firebase client configuration
+
+### Phase 3: Backend Development
+1. Firebase CLI installation and project initialization
+2. Firestore database schema design
+3. Cloud Functions for NFT minting with IPFS upload
+4. Cloud Functions for astrology API proxy
+5. Firebase Authentication with SIWA support
+6. Firebase Storage rules configuration
+7. Strapi admin interface setup and containerization
+
+### Phase 4: Integration
+1. Frontend-backend Firebase integration
+2. Pairing screen connection to Cloud Functions
+3. End-to-end testing of pairing → compatibility → NFT minting
+4. Push notification setup with FCM
+5. Admin interface integration
+
+### Phase 5: Deployment
+1. Firebase backend deployment
+2. Strapi deployment to Google Cloud Run
+3. GitHub Actions CI/CD pipeline
+4. App Clips and Instant Apps setup
+5. App Store and Play Store submissions
+
+## 5. User Flows
+
+### Primary Flow: Making a Connection
+1. User A opens app and taps "Connect"
+2. App displays QR code or prompts for NFC tap
+3. User B scans QR code or taps phone
+4. If User B lacks full app, App Clip/Instant App launches
+5. Both users confirm pairing
+6. App computes astrological compatibility
+7. Users see synastry reading and compatibility score
+8. Users tap "Mint NFT" to create blockchain asset
+9. NFT appears in both users' wallets
+10. User B prompted to install full app if using App Clip
+
+### Secondary Flow: Ongoing Engagement
+1. Users access Connection Chronicle timeline
+2. Users chat with astrology prompts
+3. Users receive daily horoscope notifications
+4. Users collect badges and achievements
+5. Users upgrade to premium features
+
+## 6. Monetization Strategy
+- **Free Tier:** Core social features + basic NFT art
+- **Premium Subscription:** $4.99-$9.99/month for deep reports, premium art styles
+- **In-App Purchases:** Special NFT styles, collectible badges
+- **NFT Marketplace:** Secondary trading fees (future)
+
+## 7. Success Metrics
+- User acquisition through App Clips/Instant Apps
+- Connection completion rate (pairing → NFT mint)
+- Daily/monthly active users
+- Chat engagement and retention
+- Premium subscription conversion rate
+- NFT minting volume and wallet integrations
+
+This PRD serves as the foundation for building Astrophysicals v1, focusing on creating magical real-world connection experiences backed by blockchain technology and astrological insights. 
