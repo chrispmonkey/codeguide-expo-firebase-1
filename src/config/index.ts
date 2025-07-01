@@ -1,3 +1,2 @@
 // Export all configuration objects from this directory
-// Example: export { firebaseConfig } from './firebase';
-export {}; 
+export { default as firebase, db, auth, storage, functions } from './firebase'; 

@@ -9,7 +9,7 @@
         "testStrategy": "Verify that the development environment is correctly set up by running:\n1. `node --version` should output v20.2.1\n2. `yarn --version` should output the correct version\n3. `expo --version` should output 7.14.0\n4. `yarn start` should successfully launch the Expo development server\n5. Ensure TypeScript compilation works without errors\n6. Verify ESLint and Prettier configurations work correctly",
         "priority": "high",
         "dependencies": [],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -85,7 +85,7 @@
               6
             ],
             "details": "Create a comprehensive README.md file including: project overview, setup instructions, available scripts, folder structure explanation, coding conventions, and contribution guidelines. Include information about Node.js, Yarn, and Expo CLI version requirements.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Review README.md to ensure all required sections are included and instructions are clear and accurate."
           },
           {
@@ -112,8 +112,99 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
-        "subtasks": []
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Firebase Project in Console",
+            "description": "Set up a new Firebase project through the Firebase console with appropriate naming and settings for the application.",
+            "dependencies": [],
+            "details": "1. Navigate to Firebase Console (https://console.firebase.google.com/)\n2. Click 'Add project' and provide a project name\n3. Configure Google Analytics settings as needed\n4. Select appropriate location/region settings\n5. Complete project creation and note down the project ID\n<info added on 2025-07-01T07:36:01.851Z>\n**Firebase Project Creation Instructions:**\n\nTo create the Firebase project for Astrophysicals:\n\n1. **Navigate to Firebase Console**: Go to https://console.firebase.google.com/\n2. **Create New Project**: Click \"Add project\" or \"Create a project\"\n3. **Project Details**:\n   - Project name: `astrophysicals` \n   - Project ID: `astrophysicals-[unique-suffix]` (Firebase will suggest)\n   - Location: Choose your preferred region (e.g., us-central1)\n4. **Google Analytics**: Enable for app analytics (recommended)\n5. **Complete Setup**: Wait for project creation to finish\n\n**Important**: Once created, note down the **Project ID** as we'll need it for the next steps.\n</info added on 2025-07-01T07:36:01.851Z>",
+            "status": "pending",
+            "testStrategy": "Verify project appears in Firebase console dashboard and all basic settings are correctly configured"
+          },
+          {
+            "id": 2,
+            "title": "Enable Required Firebase Services",
+            "description": "Activate all necessary Firebase services for the application including Firestore, Authentication, Cloud Functions, Storage, and FCM.",
+            "dependencies": [
+              1
+            ],
+            "details": "1. In Firebase console, navigate to each service section\n2. For Firestore: Create database in production or test mode\n3. For Authentication: Enable email/password and any other auth methods\n4. For Storage: Initialize with appropriate region\n5. For Cloud Functions: Enable the service\n6. For FCM: Configure cloud messaging",
+            "status": "pending",
+            "testStrategy": "Check each service dashboard to confirm activation status and initial configuration"
+          },
+          {
+            "id": 3,
+            "title": "Install and Configure Firebase CLI",
+            "description": "Set up the Firebase Command Line Interface tools to enable local development and deployment capabilities.",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Install Firebase CLI globally: `npm install -g firebase-tools`\n2. Login to Firebase: `firebase login`\n3. Initialize Firebase in project directory: `firebase init`\n4. Select previously created project\n5. Choose required features (Firestore, Functions, Storage, etc.)\n6. Configure directory structure as prompted",
+            "status": "pending",
+            "testStrategy": "Run `firebase projects:list` to verify CLI is properly connected to the project"
+          },
+          {
+            "id": 4,
+            "title": "Configure Firebase SDK in React Native App",
+            "description": "Integrate Firebase SDK into the React Native application and set up environment variables for configuration.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "1. Install required packages: `npm install firebase`\n2. Create .env file for environment variables\n3. Add Firebase config values to .env file\n4. Create firebase.ts configuration file as shown in the example\n5. Ensure proper imports in the app entry point\n6. Add appropriate type definitions if using TypeScript",
+            "status": "pending",
+            "testStrategy": "Create a simple test that initializes Firebase and verifies connection is established without errors"
+          },
+          {
+            "id": 5,
+            "title": "Set Up Firestore Security Rules",
+            "description": "Implement security rules for Firestore database to control read/write access based on authentication and user roles.",
+            "dependencies": [
+              2,
+              4
+            ],
+            "details": "1. Create firestore.rules file in project root\n2. Define basic security rules for collections\n3. Implement authentication checks\n4. Add role-based access control if needed\n5. Test rules locally using Firebase emulator\n6. Deploy rules using Firebase CLI: `firebase deploy --only firestore:rules`",
+            "status": "pending",
+            "testStrategy": "Write security rules tests using the Firebase emulator suite to verify access patterns work as expected"
+          },
+          {
+            "id": 6,
+            "title": "Configure Storage Security Rules",
+            "description": "Implement security rules for Firebase Storage to manage file upload/download permissions and access control.",
+            "dependencies": [
+              2,
+              4
+            ],
+            "details": "1. Create storage.rules file in project root\n2. Define access rules for different file paths\n3. Implement file size and type validations\n4. Add user-specific storage paths with proper permissions\n5. Test rules locally using Firebase emulator\n6. Deploy rules using Firebase CLI: `firebase deploy --only storage:rules`",
+            "status": "pending",
+            "testStrategy": "Test file upload and download operations with different user authentication states to verify rules are working"
+          },
+          {
+            "id": 7,
+            "title": "Set Up Cloud Functions Structure",
+            "description": "Create the basic structure for Firebase Cloud Functions including directory setup, dependencies, and initial function templates.",
+            "dependencies": [
+              3
+            ],
+            "details": "1. Navigate to functions directory created by Firebase init\n2. Update package.json with required dependencies\n3. Configure TypeScript if using it\n4. Create index.ts/js with basic function exports\n5. Set up directory structure for different function types (auth triggers, Firestore triggers, HTTP functions)\n6. Create sample functions for each type",
+            "status": "pending",
+            "testStrategy": "Write unit tests for functions using the Firebase Functions test framework and verify local execution with the emulator"
+          },
+          {
+            "id": 8,
+            "title": "Configure FCM for Push Notifications",
+            "description": "Set up Firebase Cloud Messaging for push notifications in the React Native application.",
+            "dependencies": [
+              2,
+              4
+            ],
+            "details": "1. Configure app manifest or Info.plist/AndroidManifest.xml for push notifications\n2. Implement notification permission requests\n3. Set up background and foreground notification handlers\n4. Create utility functions for token registration\n5. Implement functions to send test notifications\n6. Configure notification channels for Android",
+            "status": "pending",
+            "testStrategy": "Send test notifications through Firebase console and verify they are received in both foreground and background app states"
+          }
+        ]
       },
       {
         "id": 3,
@@ -302,7 +393,7 @@
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T07:32:21.108Z",
+      "updated": "2025-07-01T07:34:51.836Z",
       "description": "Tasks for master context"
     }
   }
