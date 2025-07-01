@@ -25,9 +25,7 @@
             "title": "Install essential dependencies",
             "description": "Install core dependencies required for the React Native project",
             "status": "completed",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Navigate to the project directory and run 'npm install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context'",
             "testStrategy": ""
           },
@@ -36,9 +34,7 @@
             "title": "Configure environment variables",
             "description": "Set up environment variables for different build configurations",
             "status": "done",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create .env, .env.development, and .env.production files in the root directory. Install 'react-native-dotenv' package and configure it in babel.config.js\n<info added on 2025-07-01T02:10:47.138Z>\nEnvironment variables configuration completed successfully!\n\n**What was accomplished:**\n- Installed react-native-dotenv package\n- Created .env, .env.development, and .env.production files with comprehensive configuration for:\n  - Firebase (API keys, project config)\n  - Astrology API (URL, API key)\n  - Aptos blockchain (node URLs for testnet/mainnet)\n  - IPFS/Pinata (gateway URLs, API keys)\n  - App configuration (environment, logging, feature flags)\n- Updated babel.config.js to dynamically select environment files based on NODE_ENV\n- Created src/utils/environment.ts utility for centralized config management\n- Added TypeScript declarations in types/env.d.ts for @env module\n\n**Key Features:**\n- Support for multiple environments (dev/prod)\n- Centralized configuration through Config object\n- Helper functions for environment checking\n- Type-safe environment variable access\n</info added on 2025-07-01T02:10:47.138Z>",
             "testStrategy": "Verify environment variables are correctly loaded in different build environments (development, production)"
           },
@@ -47,9 +43,7 @@
             "title": "Set up folder structure",
             "description": "Create an organized folder structure for the React Native project",
             "status": "done",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Basic folder structure with components, screens, and services has been created. Need to finalize organization and ensure proper imports/exports between modules.\n<info added on 2025-07-01T02:53:39.613Z>\n✅ Folder structure organization completed successfully!\n\n**What was accomplished:**\n- Reorganized project following React Native best practices\n- Moved directories into proper src structure:\n  - `constants/` → `src/constants/`\n  - `hooks/` → `src/hooks/`\n  - `types/` → `src/types/`\n- Created comprehensive directory structure:\n  - `src/assets/` (with fonts/ and images/ subdirectories)\n  - `src/components/` (with common/ and ui/ subdirectories)\n  - `src/contexts/` (for React context providers)\n  - `src/navigation/` (for navigation configuration)\n  - `src/store/` (for state management)\n- Created barrel export files (`index.ts`) for better imports:\n  - `src/services/index.ts` - exports all services\n  - `src/utils/index.ts` - exports utilities\n  - `src/screens/index.ts` - exports all screens\n  - `src/constants/index.ts` - exports constants\n  - `src/hooks/index.ts` - exports custom hooks\n  - `src/index.ts` - main export file for entire src directory\n- Created comprehensive `src/README.md` documentation including:\n  - Directory structure explanation\n  - Import guidelines and best practices\n  - Path alias usage examples\n  - Guidelines for adding new files\n\n**Final Structure:**\n```\nsrc/\n├── assets/           # Static assets\n├── components/       # Reusable UI components\n├── constants/        # Application constants\n├── contexts/         # React context providers\n├── hooks/            # Custom React hooks\n├── navigation/       # Navigation configuration\n├── screens/          # Application screens\n├── services/         # API services\n├── store/            # State management\n├── types/            # TypeScript definitions\n├── utils/            # Utility functions\n└── index.ts          # Main export file\n```\n\n**Benefits:**\n- Improved code organization and maintainability\n- Easier imports with barrel exports\n- Scalable structure for future development\n- Clear separation of concerns\n- Better developer experience\n</info added on 2025-07-01T02:53:39.613Z>\n<info added on 2025-07-01T05:51:25.880Z>\n🔧 **CRITICAL FIX**: Resolved app loading issue that was causing \"Welcome to Expo\" screen\n\n**Problem Found:**\n- App was showing default Expo welcome screen instead of loading properly\n- TypeScript path aliases were misconfigured after moving directories to src/\n- Import paths were pointing to wrong locations causing module resolution failures\n\n**What was Fixed:**\n1. **Updated tsconfig.json path aliases** to correctly map to new src/ structure:\n   - `@/constants/*` → `./src/constants/*`\n   - `@/hooks/*` → `./src/hooks/*` \n   - `@/services/*` → `./src/services/*`\n   - `@/screens/*` → `./src/screens/*`\n   - etc.\n\n2. **Fixed incorrect import paths** in multiple files:\n   - `app/compatibility.tsx`: `@/src/screens/` → `@/screens/`\n   - `app/pairing.tsx`: `@/src/screens/` → `@/screens/`\n   - `src/screens/CompatibilityScreen.tsx`: `@/src/services/` → `@/services/`\n\n3. **Recreated missing TypeScript declarations** for @env module in correct location\n\n**Verification:**\n- All TypeScript errors resolved (from 12 errors down to 0)\n- Type checking passes cleanly: `npm run type-check` ✅\n- App structure now properly organized and functional\n\n**Status:** App should now load correctly instead of showing the default Expo welcome screen. The folder restructuring is complete and all imports are working properly.\n</info added on 2025-07-01T05:51:25.880Z>\n<info added on 2025-07-01T05:58:57.110Z>\n🔧 **RUNTIME ERROR FIXED**: Resolved \"Welcome to Expo\" screen issue\n\n**Root Cause Found:**\n- The PairingScreen was importing `react-native-nfc-manager` which requires a development build\n- NFC functionality doesn't work with Expo Go, causing silent runtime failures\n\n**Solution Applied:**\n- Temporarily disabled NFC import and initialization code\n- Added proper error handling and user messaging about NFC requiring dev build  \n- Created fallback navigation options for users without camera access\n- Added demo button to easily access sample compatibility screen\n- Kept QR code scanning functionality (which works with Expo Go)\n\n**Result:**\n- App should now load properly in Expo Go\n- QR scanning still functional via expo-barcode-scanner\n- Clear user messaging about NFC limitations\n- Proper fallback navigation flows\n</info added on 2025-07-01T05:58:57.110Z>\n<info added on 2025-07-01T06:04:28.452Z>\n🎯 **STRUCTURE ISSUE IDENTIFIED & FIXED**: Root cause of \"Welcome to Expo\" screen\n\n**Problem Discovered:**\n- Mixed folder structure with components in BOTH `/components` (root) AND `/src/components`\n- Incomplete path aliases in tsconfig.json causing module resolution failures\n- Imports like `@/screens/PairingScreen` were failing because path mappings were incomplete\n\n**Critical Fix Applied:**\n- **Enhanced tsconfig.json path aliases** with explicit mappings:\n  ```json\n  {\n    \"@/*\": [\"./src/*\"],                    // General src access\n    \"@/components/*\": [\"./components/*\"],  // Root components (Expo default)\n    \"@/screens/*\": [\"./src/screens/*\"],    // Explicit screen mapping\n    \"@/services/*\": [\"./src/services/*\"],  // Explicit service mapping  \n    \"@/hooks/*\": [\"./src/hooks/*\"],        // Explicit hooks mapping\n    \"@/constants/*\": [\"./src/constants/*\"], // Explicit constants mapping\n    \"@/utils/*\": [\"./src/utils/*\"],        // Explicit utils mapping\n    \"@/types/*\": [\"./src/types/*\"]         // Explicit types mapping\n  }\n  ```\n\n**Current Structure (Following Expo Best Practices):**\n- `/app/` - Expo Router routing files ✅\n- `/components/` - Root UI components (ThemedView, ParallaxScrollView, etc.) ✅  \n- `/src/` - Organized source code (screens, services, hooks, etc.) ✅\n- `/assets/` - Static assets ✅\n\n**Result:**\n- Metro bundler restarted with clear cache ✅\n- TypeScript compilation clean (0 errors) ✅\n- All path aliases now resolve correctly ✅\n- Both NFC runtime issue AND path resolution issue fixed ✅\n</info added on 2025-07-01T06:04:28.452Z>\n<info added on 2025-07-01T06:10:01.451Z>\n🎯 **STRUCTURE COMPLETELY REORGANIZED**: Now follows proper Expo Router best practices\n\n**Problem Identified:**\n- User correctly questioned the `src` folder approach - it's NOT standard for Expo Router\n- We were mixing paradigms (React/Next.js pattern vs Expo Router convention)\n- Expo Router expects flat structure at root level, not nested in `src`\n\n**Complete Restructure Applied:**\n✅ **Removed `/src` folder entirely** - not needed for Expo Router\n✅ **Moved to proper Expo Router structure:**\n   - `/src/constants/` → `/constants/` \n   - `/src/hooks/` → `/hooks/`\n   - `/src/types/` → `/types/`\n   - `/src/screens/` → `/lib/screens/`\n   - `/src/services/` → `/lib/services/`\n   - `/src/utils/` → `/lib/utils/`\n\n**New Structure (Expo Router Best Practices):**\n```\nproject/\n├── app/                    # 📱 File-based routing (Expo Router)\n├── components/             # 🧩 Reusable UI components  \n├── constants/              # 📊 App constants (Colors, etc.)\n├── hooks/                  # 🪝 Custom React hooks\n├── lib/                    # 📚 Business logic (screens, services, utils)\n├── types/                  # 📝 TypeScript definitions\n├── assets/                 # 🖼️ Static assets\n└── config/                 # ⚙️ Configuration files\n```\n\n**Updated Path Aliases (tsconfig.json):**\n```json\n{\n  \"@/*\": [\"./*\"],                    // Root access\n  \"@/components/*\": [\"./components/*\"], \n  \"@/lib/*\": [\"./lib/*\"],            // Business logic\n  \"@/constants/*\": [\"./constants/*\"],\n  \"@/hooks/*\": [\"./hooks/*\"],\n  \"@/types/*\": [\"./types/*\"],\n  \"@/config/*\": [\"./config/*\"],\n  \"@/assets/*\": [\"./assets/*\"]\n}\n```\n\n**Updated All Imports:**\n- `@/screens/` → `@/lib/screens/`\n- `@/services/` → `@/lib/services/`  \n- All other imports verified and working\n\n**Result:**\n- ✅ TypeScript compilation clean (0 errors)\n- ✅ Follows official Expo Router conventions\n- ✅ Cleaner, simpler structure\n- ✅ No more path alias confusion\n- ✅ Metro bundler restarted successfully\n</info added on 2025-07-01T06:10:01.451Z>",
             "testStrategy": "Verify all imports work correctly and the structure follows best practices"
           },
@@ -58,10 +52,7 @@
             "title": "Configure ESLint and Prettier",
             "description": "Set up linting and code formatting tools for the project",
             "status": "done",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Install ESLint and Prettier as dev dependencies. Create .eslintrc.js and .prettierrc files in the root directory. Configure rules and integrate with VS Code\n<info added on 2025-07-01T02:42:58.308Z>\n✅ ESLint and Prettier configuration completed successfully!\n\n**What was accomplished:**\n- Installed ESLint, Prettier, and all related plugins for React Native TypeScript development\n- Created modern eslint.config.js using ESLint 9.x flat configuration format\n- Created .prettierrc with consistent formatting rules\n- Added comprehensive npm scripts to package.json:\n  - `lint`: Run ESLint on all source files\n  - `lint:fix`: Auto-fix ESLint issues\n  - `format`: Format all files with Prettier\n  - `format:check`: Check if files are properly formatted\n  - `type-check`: Run TypeScript type checking\n  - `code-quality`: Run all quality checks together\n- Successfully formatted 67 files across the project\n- Auto-fixed 87 linting issues (from 142 to 55 remaining)\n\n**Current Status:**\n- All tools are working correctly\n- Code quality pipeline is established\n- Remaining 80 linting issues are mostly:\n  - Unused variables (need underscore prefix or removal)\n  - Missing trailing commas (auto-fixable)\n  - Console statements (warnings only)\n  - Some `any` types (need specific typing)\n\n**Configuration Features:**\n- TypeScript-aware linting rules\n- React Native specific rules\n- Consistent code formatting\n- Integration between ESLint and Prettier\n- Automated quality checks\n</info added on 2025-07-01T02:42:58.308Z>",
             "testStrategy": "Run linting on the codebase and verify formatting is applied consistently"
           },
@@ -70,10 +61,7 @@
             "title": "Verify TypeScript configuration",
             "description": "Ensure TypeScript is properly configured for the project",
             "status": "completed",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Review tsconfig.json settings, verify type definitions for all dependencies, and ensure type checking is working correctly throughout the project",
             "testStrategy": ""
           },
@@ -82,11 +70,7 @@
             "title": "Create and test basic screens",
             "description": "Implement initial screens required for the application",
             "status": "completed",
-            "dependencies": [
-              1,
-              2,
-              4
-            ],
+            "dependencies": [1, 2, 4],
             "details": "PairingScreen and CompatibilityScreen have been created. Verify they render correctly and navigation between them works as expected.",
             "testStrategy": ""
           }
@@ -99,9 +83,7 @@
         "details": "Use the Aptos SDK (latest version) to implement SIWA. Integrate with React Native's SecureStore for iOS and Android Keystore for secure key storage. Implement a fallback for manual wallet creation and mnemonic backup. Use Firebase Authentication for user management.",
         "testStrategy": "Test SIWA flow on both iOS and Android, verify wallet creation in secure enclave, ensure mnemonic backup functionality works correctly.",
         "priority": "high",
-        "dependencies": [
-          26
-        ],
+        "dependencies": [26],
         "status": "pending",
         "subtasks": [
           {
@@ -117,9 +99,7 @@
             "id": 2,
             "title": "Implement SIWA button and flow",
             "description": "Create the SIWA button and handle the authentication flow",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Design and implement the SIWA button, handle user interaction, and manage the authentication process including error handling",
             "status": "pending",
             "testStrategy": ""
@@ -146,11 +126,7 @@
             "id": 5,
             "title": "Integrate Firebase Authentication",
             "description": "Implement Firebase Authentication in the app",
-            "dependencies": [
-              2,
-              3,
-              4
-            ],
+            "dependencies": [2, 3, 4],
             "details": "Add Firebase SDK, initialize Firebase in the app, and implement methods to sign in, sign out, and manage the user's authentication state",
             "status": "pending",
             "testStrategy": ""
@@ -159,9 +135,7 @@
             "id": 6,
             "title": "Test and debug SIWA implementation",
             "description": "Thoroughly test the SIWA authentication flow and fix any issues",
-            "dependencies": [
-              5
-            ],
+            "dependencies": [5],
             "details": "Create test cases for various scenarios, perform unit and integration tests, and debug any issues that arise during the testing process",
             "status": "pending",
             "testStrategy": ""
@@ -175,9 +149,7 @@
         "details": "Design a multi-step form for birth data capture. Use react-native-encrypted-storage for client-side encryption of sensitive data. Implement form validation and error handling. Store encrypted profile data in Firebase Firestore.",
         "testStrategy": "Validate form inputs, test encryption/decryption of birth data, verify data storage in Firestore, ensure GDPR compliance with data handling.",
         "priority": "high",
-        "dependencies": [
-          27
-        ],
+        "dependencies": [27],
         "status": "pending",
         "subtasks": [
           {
@@ -193,9 +165,7 @@
             "id": 2,
             "title": "Implement form validation",
             "description": "Develop client-side validation for all input fields",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create validation rules for each form field, including email format, password strength, and required fields. Implement real-time feedback for users and prevent form submission with invalid data.",
             "status": "pending",
             "testStrategy": ""
@@ -204,9 +174,7 @@
             "id": 3,
             "title": "Implement client-side encryption",
             "description": "Develop a secure method for encrypting sensitive user data on the client-side",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Research and implement a robust client-side encryption library. Ensure that sensitive user data is encrypted before being sent to the server. Test the encryption process thoroughly to guarantee data security.",
             "status": "pending",
             "testStrategy": ""
@@ -215,9 +183,7 @@
             "id": 4,
             "title": "Set up secure data storage",
             "description": "Implement GDPR-compliant data storage on the server",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Design and implement a database schema that adheres to GDPR requirements. Set up secure API endpoints for receiving and storing encrypted user data. Implement data retention policies and user data access controls.",
             "status": "pending",
             "testStrategy": ""
@@ -231,10 +197,7 @@
         "details": "Use react-native-qrcode-svg for QR code generation and react-native-camera for scanning. Implement a unique pairing protocol using temporary tokens. Ensure QR codes are dynamic and expire after a short time for security.",
         "testStrategy": "Test QR code generation and scanning on various devices, verify successful pairing between two users, test edge cases like expired codes or network issues.",
         "priority": "high",
-        "dependencies": [
-          26,
-          28
-        ],
+        "dependencies": [26, 28],
         "status": "pending",
         "subtasks": [
           {
@@ -259,10 +222,7 @@
             "id": 3,
             "title": "Design and Implement Pairing Protocol",
             "description": "Create a secure protocol for pairing devices using the information from scanned QR codes",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Define the structure of the pairing data. Implement encryption for the pairing process. Create a handshake mechanism to verify both devices. Handle potential errors and edge cases in the pairing process.",
             "status": "pending",
             "testStrategy": ""
@@ -271,9 +231,7 @@
             "id": 4,
             "title": "Implement Security Measures",
             "description": "Add security features to protect the pairing process and prevent unauthorized access",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Implement SSL/TLS for all network communications. Add a time-based component to QR codes to prevent replay attacks. Implement rate limiting for pairing attempts. Create a mechanism for revoking pairing if a device is compromised.",
             "status": "pending",
             "testStrategy": ""
@@ -287,10 +245,7 @@
         "details": "Use react-native-nfc-manager library for NFC functionality. Implement device compatibility check. Create a fallback to QR code if NFC is not available. Use the same pairing protocol as QR code method for consistency.",
         "testStrategy": "Test NFC pairing on compatible devices, verify fallback to QR on non-NFC devices, ensure pairing data is correctly exchanged.",
         "priority": "medium",
-        "dependencies": [
-          26,
-          28
-        ],
+        "dependencies": [26, 28],
         "status": "pending",
         "subtasks": [
           {
@@ -306,9 +261,7 @@
             "id": 2,
             "title": "Develop NFC read/write functionality",
             "description": "Implement core NFC operations for reading and writing data",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Use NFC APIs to handle tag detection, data reading, and writing. Implement error handling and data validation.",
             "status": "pending",
             "testStrategy": ""
@@ -317,9 +270,7 @@
             "id": 3,
             "title": "Create fallback mechanism for non-NFC devices",
             "description": "Develop alternative methods for devices without NFC support",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Implement QR code scanning or manual input options as fallback. Ensure seamless user experience across all device types.",
             "status": "pending",
             "testStrategy": ""
@@ -328,10 +279,7 @@
             "id": 4,
             "title": "Integrate NFC functionality with app features",
             "description": "Connect NFC operations with relevant app features and user flows",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Update UI to incorporate NFC actions, handle NFC events in app logic, and ensure proper data flow between NFC operations and app functionality.",
             "status": "pending",
             "testStrategy": ""
@@ -345,9 +293,7 @@
         "details": "Research and select an appropriate astrology API (e.g., AstrologyAPI.com or Swiss Ephemeris wrappers). Implement API client using axios or fetch. Create utility functions for data parsing and caching. Implement error handling and retry logic with exponential backoff.",
         "testStrategy": "Unit test API client functions, mock API responses for testing, verify correct parsing of astrological data, test caching mechanism and error handling.",
         "priority": "high",
-        "dependencies": [
-          28
-        ],
+        "dependencies": [28],
         "status": "pending",
         "subtasks": [
           {
@@ -363,9 +309,7 @@
             "id": 2,
             "title": "Implement Data Parsing and Serialization",
             "description": "Develop robust data parsing and serialization mechanisms",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create parsers for different data formats (JSON, XML), implement serialization/deserialization logic, and handle data type conversions.",
             "status": "pending",
             "testStrategy": ""
@@ -374,10 +318,7 @@
             "id": 3,
             "title": "Design and Implement Caching Strategy",
             "description": "Create an efficient caching system for API responses",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Determine appropriate caching policies, implement cache storage (in-memory, disk-based), and develop cache invalidation mechanisms.",
             "status": "pending",
             "testStrategy": ""
@@ -386,10 +327,7 @@
             "id": 4,
             "title": "Develop Error Handling and Retry Logic",
             "description": "Implement comprehensive error handling and retry mechanisms",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Create error classification system, implement logging and reporting, develop retry strategies for transient failures, and handle edge cases.",
             "status": "pending",
             "testStrategy": ""
@@ -398,12 +336,7 @@
             "id": 5,
             "title": "Optimize Performance and Conduct Testing",
             "description": "Optimize API integration performance and conduct thorough testing",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "dependencies": [1, 2, 3, 4],
             "details": "Perform load testing, optimize network requests, implement connection pooling, and create comprehensive unit and integration tests for the API client.",
             "status": "pending",
             "testStrategy": ""
@@ -417,10 +350,7 @@
         "details": "Use Aptos SDK (latest version) for blockchain interactions. Implement NFT metadata generation based on astrological data. Use IPFS (via Pinata or NFT.storage) for metadata and art storage. Implement Firebase Storage as a CDN fallback. Create a queue system for offline minting requests.",
         "testStrategy": "Test NFT minting on Aptos testnet, verify metadata and art storage on IPFS and Firebase, test offline queuing and retry mechanism.",
         "priority": "high",
-        "dependencies": [
-          27,
-          31
-        ],
+        "dependencies": [27, 31],
         "status": "pending",
         "subtasks": [
           {
@@ -436,9 +366,7 @@
             "id": 2,
             "title": "Develop smart contract for NFT minting",
             "description": "Create and test the smart contract that will handle NFT minting on the blockchain",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Implement ERC-721 or ERC-1155 standard, include minting functions, and add necessary access controls",
             "status": "pending",
             "testStrategy": ""
@@ -456,9 +384,7 @@
             "id": 4,
             "title": "Set up decentralized storage solution",
             "description": "Implement a storage solution for NFT assets and metadata (e.g., IPFS)",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Set up IPFS node or integrate with a pinning service, implement upload and retrieval functions",
             "status": "pending",
             "testStrategy": ""
@@ -467,10 +393,7 @@
             "id": 5,
             "title": "Develop minting interface",
             "description": "Create a user interface for minting NFTs",
-            "dependencies": [
-              2,
-              4
-            ],
+            "dependencies": [2, 4],
             "details": "Design and implement UI components, integrate with wallet providers, and handle user interactions",
             "status": "pending",
             "testStrategy": ""
@@ -479,9 +402,7 @@
             "id": 6,
             "title": "Implement offline handling mechanisms",
             "description": "Develop solutions for handling offline scenarios during the minting process",
-            "dependencies": [
-              5
-            ],
+            "dependencies": [5],
             "details": "Implement local storage for unsent transactions, develop retry mechanisms, and ensure data integrity",
             "status": "pending",
             "testStrategy": ""
@@ -490,14 +411,7 @@
             "id": 7,
             "title": "Conduct testing and deployment",
             "description": "Perform comprehensive testing and deploy the NFT minting system",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6
-            ],
+            "dependencies": [1, 2, 3, 4, 5, 6],
             "details": "Conduct unit tests, integration tests, security audits, and deploy to mainnet",
             "status": "pending",
             "testStrategy": ""
@@ -511,10 +425,7 @@
         "details": "Integrate with Stable Diffusion API or set up a custom model using TensorFlow Lite. Create prompts based on astrological data. Implement art generation as a Cloud Function. Optimize for mobile performance and implement caching for generated art.",
         "testStrategy": "Test art generation with various astrological inputs, verify uniqueness and quality of generated art, measure performance and optimize as needed.",
         "priority": "medium",
-        "dependencies": [
-          31,
-          32
-        ],
+        "dependencies": [31, 32],
         "status": "pending",
         "subtasks": [
           {
@@ -530,9 +441,7 @@
             "id": 2,
             "title": "Set up API integration",
             "description": "Implement the chosen AI art generation API into the project",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Register for API access, obtain necessary credentials, and integrate the API into the project's backend. Set up error handling and implement rate limiting to manage API usage.",
             "status": "pending",
             "testStrategy": ""
@@ -541,9 +450,7 @@
             "id": 3,
             "title": "Develop prompt creation interface",
             "description": "Create a user-friendly interface for inputting and customizing art generation prompts",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Design and implement a mobile-friendly interface that allows users to input text prompts, select style options, and adjust generation parameters. Include features like prompt suggestions and history.",
             "status": "pending",
             "testStrategy": ""
@@ -552,9 +459,7 @@
             "id": 4,
             "title": "Implement image processing for mobile optimization",
             "description": "Develop a system to optimize generated images for mobile devices",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Create a pipeline to process generated images, including resizing, compression, and format conversion. Implement lazy loading and caching strategies to improve mobile performance.",
             "status": "pending",
             "testStrategy": ""
@@ -563,10 +468,7 @@
             "id": 5,
             "title": "Develop result display and management system",
             "description": "Create a system to display, save, and manage generated art pieces",
-            "dependencies": [
-              3,
-              4
-            ],
+            "dependencies": [3, 4],
             "details": "Implement a gallery view for displaying generated art, with options to save, share, and delete images. Include metadata management for tracking generation parameters and user interactions.",
             "status": "pending",
             "testStrategy": ""
@@ -575,9 +477,7 @@
             "id": 6,
             "title": "Optimize overall mobile performance",
             "description": "Fine-tune the entire system for optimal performance on mobile devices",
-            "dependencies": [
-              5
-            ],
+            "dependencies": [5],
             "details": "Conduct performance profiling, optimize network requests, implement efficient state management, and minimize battery usage. Test on various mobile devices and network conditions to ensure smooth operation.",
             "status": "pending",
             "testStrategy": ""
@@ -591,10 +491,7 @@
         "details": "Use Firebase Realtime Database or Firestore for real-time data. Implement chat UI using react-native-gifted-chat. Add image upload functionality using react-native-image-picker and Firebase Storage. Implement typing indicators and read receipts.",
         "testStrategy": "Test real-time message delivery, verify image uploads and display, test typing indicators and read receipts across different devices.",
         "priority": "high",
-        "dependencies": [
-          26,
-          27
-        ],
+        "dependencies": [26, 27],
         "status": "pending",
         "subtasks": [
           {
@@ -619,10 +516,7 @@
             "id": 3,
             "title": "Implement media sharing functionality",
             "description": "Add support for sharing images, videos, and files in the chat",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Implement file upload, preview generation, and integration with real-time data handling for media sharing",
             "status": "pending",
             "testStrategy": ""
@@ -631,10 +525,7 @@
             "id": 4,
             "title": "Add typing indicators",
             "description": "Implement real-time typing indicators for chat participants",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Create a typing indicator component and integrate it with real-time data handling to show when users are typing",
             "status": "pending",
             "testStrategy": ""
@@ -643,10 +534,7 @@
             "id": 5,
             "title": "Implement chat history and message persistence",
             "description": "Add functionality to load chat history and persist messages",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Implement message storage, retrieval of chat history, and pagination for loading older messages",
             "status": "pending",
             "testStrategy": ""
@@ -660,10 +548,7 @@
         "details": "Develop an algorithm to generate relevant prompts based on users' astrological data. Create a database of prompts and implement a selection mechanism. Integrate prompts into the chat UI as interactive elements.",
         "testStrategy": "Verify prompt relevance to users' astrological profiles, test prompt display and interaction in chat, ensure prompt variety and engagement.",
         "priority": "medium",
-        "dependencies": [
-          31,
-          34
-        ],
+        "dependencies": [31, 34],
         "status": "pending",
         "subtasks": [
           {
@@ -679,9 +564,7 @@
             "id": 2,
             "title": "Develop algorithm for generating astrological prompts",
             "description": "Create an algorithm that combines astrological components to generate meaningful and diverse prompts.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Design a logic flow for selecting and combining astrological elements. Implement randomization techniques to ensure variety in prompts. Develop methods for adjusting prompt complexity based on user preferences.",
             "status": "pending",
             "testStrategy": ""
@@ -690,9 +573,7 @@
             "id": 3,
             "title": "Create and populate astrological database",
             "description": "Design and build a database to store astrological information and generated prompts.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Choose appropriate database technology. Create tables for storing astrological elements, interpretations, and generated prompts. Develop methods for efficient data retrieval and updates.",
             "status": "pending",
             "testStrategy": ""
@@ -701,10 +582,7 @@
             "id": 4,
             "title": "Design and implement user interface",
             "description": "Create an intuitive and visually appealing UI for users to interact with the astrology-based prompt system.",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Design user-friendly interface for inputting astrological data and preferences. Develop display methods for showing generated prompts. Implement features for saving, sharing, and customizing prompts.",
             "status": "pending",
             "testStrategy": ""
@@ -718,10 +596,7 @@
         "details": "Design and implement a scrollable timeline UI component. Integrate with Firestore for event storage and retrieval. Implement lazy loading for performance. Add functionality to display NFTs, badges, and media attachments in the timeline.",
         "testStrategy": "Test timeline rendering with various event types, verify correct ordering and display of events, test performance with large datasets.",
         "priority": "medium",
-        "dependencies": [
-          32,
-          34
-        ],
+        "dependencies": [32, 34],
         "status": "pending",
         "subtasks": [
           {
@@ -746,10 +621,7 @@
             "id": 3,
             "title": "Create timeline rendering logic",
             "description": "Develop the core logic for rendering timeline entries based on date ranges and user interactions.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Implement virtual scrolling for handling large datasets. Use memoization techniques to optimize re-renders. Consider using Web Workers for heavy computations.",
             "status": "pending",
             "testStrategy": ""
@@ -758,9 +630,7 @@
             "id": 4,
             "title": "Implement timeline navigation and zooming",
             "description": "Add functionality for users to navigate through the timeline and zoom in/out to different time scales.",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Use efficient algorithms for date calculations. Implement smooth animations for transitions. Ensure performance is maintained at different zoom levels.",
             "status": "pending",
             "testStrategy": ""
@@ -769,9 +639,7 @@
             "id": 5,
             "title": "Optimize performance and conduct testing",
             "description": "Perform thorough performance optimization and conduct comprehensive testing of the timeline feature.",
-            "dependencies": [
-              4
-            ],
+            "dependencies": [4],
             "details": "Use React Profiler to identify and resolve performance bottlenecks. Implement lazy loading for off-screen content. Conduct unit, integration, and end-to-end tests. Perform cross-browser and device testing.",
             "status": "pending",
             "testStrategy": ""
@@ -801,9 +669,7 @@
             "id": 2,
             "title": "Design Content Types and API",
             "description": "Create content types and structure the API for the project requirements",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Define content types, set up relationships, configure API endpoints, and test API responses",
             "status": "pending",
             "testStrategy": ""
@@ -812,9 +678,7 @@
             "id": 3,
             "title": "Implement Role-Based Access Control",
             "description": "Configure user roles and permissions for different parts of the application",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Create user roles, set up permissions for each role, and test access control for different user types",
             "status": "pending",
             "testStrategy": ""
@@ -823,9 +687,7 @@
             "id": 4,
             "title": "Develop Custom Plugin",
             "description": "Create a custom plugin to extend Strapi's functionality for project-specific requirements",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Plan plugin structure, implement backend logic, create admin panel interface, and integrate with existing content types",
             "status": "pending",
             "testStrategy": ""
@@ -834,10 +696,7 @@
             "id": 5,
             "title": "Implement Security Measures",
             "description": "Set up security features to protect the Strapi application and its data",
-            "dependencies": [
-              3,
-              4
-            ],
+            "dependencies": [3, 4],
             "details": "Configure SSL/TLS, set up rate limiting, implement authentication strategies, and perform security audits",
             "status": "pending",
             "testStrategy": ""
@@ -846,9 +705,7 @@
             "id": 6,
             "title": "Deploy Strapi Application",
             "description": "Prepare and deploy the Strapi application to a production environment",
-            "dependencies": [
-              5
-            ],
+            "dependencies": [5],
             "details": "Choose hosting platform, configure environment variables, set up CI/CD pipeline, and perform deployment with monitoring",
             "status": "pending",
             "testStrategy": ""
@@ -862,10 +719,7 @@
         "details": "Integrate React Native In-App Purchase for iOS and Android. Implement subscription logic ($4.99-$9.99/mo) and one-time purchases for NFT styles. Use Firebase Remote Config for dynamic pricing. Implement receipt validation and subscription status tracking.",
         "testStrategy": "Test purchase flows on both iOS and Android, verify subscription activation and renewal, test receipt validation and restore purchases functionality.",
         "priority": "high",
-        "dependencies": [
-          26,
-          27
-        ],
+        "dependencies": [26, 27],
         "status": "pending",
         "subtasks": [
           {
@@ -881,9 +735,7 @@
             "id": 2,
             "title": "Design IAP architecture",
             "description": "Create a high-level architecture for implementing in-app purchases across both platforms",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Design a unified interface for IAP operations, plan for platform-specific implementations, and outline the integration with the app's existing architecture.",
             "status": "pending",
             "testStrategy": ""
@@ -892,9 +744,7 @@
             "id": 3,
             "title": "Implement platform-specific IAP integrations",
             "description": "Develop the necessary code to integrate in-app purchases for both iOS and Android platforms",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Implement StoreKit for iOS and Google Play Billing Library for Android. Create wrapper classes to provide a unified interface for the app.",
             "status": "pending",
             "testStrategy": ""
@@ -903,9 +753,7 @@
             "id": 4,
             "title": "Develop subscription logic",
             "description": "Create the logic to handle different types of subscriptions, including trial periods, renewals, and cancellations",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Implement subscription state management, handle upgrade/downgrade scenarios, and ensure proper tracking of subscription lifecycles.",
             "status": "pending",
             "testStrategy": ""
@@ -914,9 +762,7 @@
             "id": 5,
             "title": "Implement receipt validation",
             "description": "Develop secure server-side receipt validation for both platforms to prevent fraud",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Create a server endpoint to verify receipts with Apple and Google servers. Implement caching and retry mechanisms for improved performance and reliability.",
             "status": "pending",
             "testStrategy": ""
@@ -925,11 +771,7 @@
             "id": 6,
             "title": "Test and debug IAP implementation",
             "description": "Conduct thorough testing of the in-app purchase system, including edge cases and error scenarios",
-            "dependencies": [
-              3,
-              4,
-              5
-            ],
+            "dependencies": [3, 4, 5],
             "details": "Create test plans for various purchase scenarios, subscription states, and receipt validation. Use sandbox environments for testing. Debug and fix any issues found during testing.",
             "status": "pending",
             "testStrategy": ""
@@ -943,11 +785,7 @@
         "details": "Use Firebase Cloud Messaging (FCM) for cross-platform push notifications. Implement notification categories and actions. Create a Cloud Function to generate and send daily horoscopes and transit alerts. Implement chat notification logic in the app.",
         "testStrategy": "Test notification delivery on iOS and Android, verify correct handling of notification actions, test scheduling of daily horoscopes and transit alerts.",
         "priority": "medium",
-        "dependencies": [
-          26,
-          31,
-          34
-        ],
+        "dependencies": [26, 31, 34],
         "status": "pending",
         "subtasks": [
           {
@@ -963,9 +801,7 @@
             "id": 2,
             "title": "Define notification categories",
             "description": "Identify and implement different types of push notifications",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create categories such as 'New Message', 'Event Reminder', 'Update Available', etc., and design their respective payloads",
             "status": "pending",
             "testStrategy": ""
@@ -974,10 +810,7 @@
             "id": 3,
             "title": "Implement client-side notification handling",
             "description": "Develop logic to receive and display push notifications on the mobile app",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Set up notification channels, customize notification appearance, and handle user interaction with notifications",
             "status": "pending",
             "testStrategy": ""
@@ -986,10 +819,7 @@
             "id": 4,
             "title": "Develop server-side notification logic",
             "description": "Create backend services to trigger and manage automated push notifications",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Implement API endpoints for sending notifications, schedule automated notifications, and integrate with FCM for message delivery",
             "status": "pending",
             "testStrategy": ""
@@ -1003,11 +833,7 @@
         "details": "For iOS, use Xcode to create an App Clip target. For Android, use Android Studio to create an Instant App module. Implement a streamlined onboarding process for minimal data capture. Ensure seamless handoff to full app installation.",
         "testStrategy": "Test App Clip and Instant App functionality on various devices, verify data persistence when transitioning to full app, ensure compliance with app store guidelines.",
         "priority": "high",
-        "dependencies": [
-          26,
-          29,
-          30
-        ],
+        "dependencies": [26, 29, 30],
         "status": "pending",
         "subtasks": [
           {
@@ -1023,9 +849,7 @@
             "id": 2,
             "title": "Design streamlined onboarding process",
             "description": "Create a simplified and efficient onboarding flow for the lightweight app versions",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Work with UX/UI designers to develop a minimalist onboarding experience that quickly introduces users to core functionality. Focus on reducing friction and time-to-value for new users.",
             "status": "pending",
             "testStrategy": ""
@@ -1034,10 +858,7 @@
             "id": 3,
             "title": "Develop platform-specific lightweight versions",
             "description": "Create lightweight versions of the app for different platforms (e.g., iOS, Android, web)",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Implement the core features and streamlined onboarding process for each platform, optimizing for performance and minimal resource usage. Ensure consistency across platforms while adhering to platform-specific design guidelines.",
             "status": "pending",
             "testStrategy": ""
@@ -1046,9 +867,7 @@
             "id": 4,
             "title": "Implement seamless transition mechanism",
             "description": "Develop a system to smoothly transition users from lightweight to full app versions",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Create a mechanism to detect when a user is ready for the full app experience. Design and implement a non-intrusive prompt for users to upgrade, ensuring data and preferences are carried over seamlessly.",
             "status": "pending",
             "testStrategy": ""
@@ -1057,10 +876,7 @@
             "id": 5,
             "title": "Test lightweight versions and transition process",
             "description": "Conduct thorough testing of lightweight app versions and the transition to full apps",
-            "dependencies": [
-              3,
-              4
-            ],
+            "dependencies": [3, 4],
             "details": "Perform functional, usability, and performance testing on all lightweight versions. Test the transition process to ensure a smooth upgrade experience. Identify and resolve any issues or bugs.",
             "status": "pending",
             "testStrategy": ""
@@ -1069,9 +885,7 @@
             "id": 6,
             "title": "Deploy and monitor lightweight app versions",
             "description": "Release lightweight versions to app stores and monitor their performance and user adoption",
-            "dependencies": [
-              5
-            ],
+            "dependencies": [5],
             "details": "Prepare and submit lightweight versions to respective app stores. Set up analytics and monitoring tools to track user engagement, conversion rates to full app versions, and overall performance metrics.",
             "status": "pending",
             "testStrategy": ""
@@ -1085,10 +899,7 @@
         "details": "Use AsyncStorage or SQLite for local caching. Implement a sync service using WorkManager (Android) and Background Fetch (iOS). Create conflict resolution logic for data syncing. Implement progressive loading of content when coming back online.",
         "testStrategy": "Test app functionality in offline mode, verify data syncing when connection is restored, test conflict resolution scenarios.",
         "priority": "medium",
-        "dependencies": [
-          32,
-          36
-        ],
+        "dependencies": [32, 36],
         "status": "pending",
         "subtasks": [
           {
@@ -1104,9 +915,7 @@
             "id": 2,
             "title": "Develop offline data access layer",
             "description": "Create an abstraction layer to handle data access in both online and offline modes",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Implement a service that checks network connectivity and routes data requests to either local storage or remote API as appropriate.",
             "status": "pending",
             "testStrategy": ""
@@ -1115,10 +924,7 @@
             "id": 3,
             "title": "Implement background sync service",
             "description": "Create a service to sync local changes with the server when connectivity is restored",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Use Service Workers to implement background sync. Queue changes made offline and sync them when online.",
             "status": "pending",
             "testStrategy": ""
@@ -1127,9 +933,7 @@
             "id": 4,
             "title": "Develop conflict resolution strategies",
             "description": "Implement logic to handle conflicts between local and server data",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Create algorithms for merging conflicting data. Implement user-facing conflict resolution UI when automatic merging is not possible.",
             "status": "pending",
             "testStrategy": ""
@@ -1138,10 +942,7 @@
             "id": 5,
             "title": "Implement offline-first UI updates",
             "description": "Update the user interface to reflect offline status and sync progress",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Add indicators for offline mode, sync status, and pending changes. Implement optimistic UI updates for offline actions.",
             "status": "pending",
             "testStrategy": ""
@@ -1150,13 +951,7 @@
             "id": 6,
             "title": "Perform comprehensive testing",
             "description": "Conduct thorough testing of offline functionality and sync processes",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
+            "dependencies": [1, 2, 3, 4, 5],
             "details": "Create test scenarios for various network conditions. Test conflict resolution, data integrity, and sync reliability.",
             "status": "pending",
             "testStrategy": ""
@@ -1170,9 +965,7 @@
         "details": "Use React Native's Appearance API for system-level dark mode detection. Implement a custom theming system using React Context. Create smooth transitions between light and dark modes. Ensure all UI components are theme-aware.",
         "testStrategy": "Test dark mode toggle functionality, verify correct theme application across all screens, test theme persistence across app restarts.",
         "priority": "medium",
-        "dependencies": [
-          26
-        ],
+        "dependencies": [26],
         "status": "pending",
         "subtasks": [
           {
@@ -1188,9 +981,7 @@
             "id": 2,
             "title": "Design and implement color palette",
             "description": "Create a comprehensive color palette for both light and dark themes, ensuring accessibility and contrast ratios.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Define primary, secondary, and accent colors. Create semantic color variables. Ensure WCAG compliance for text contrast.",
             "status": "pending",
             "testStrategy": ""
@@ -1199,9 +990,7 @@
             "id": 3,
             "title": "Apply theming to all UI components",
             "description": "Update all UI components to use the new theming system, ensuring consistency across the app.",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Refactor components to use theme variables. Update styles for buttons, forms, modals, and other UI elements. Test all components in both themes.",
             "status": "pending",
             "testStrategy": ""
@@ -1210,9 +999,7 @@
             "id": 4,
             "title": "Implement smooth theme transitions",
             "description": "Add smooth transitions when switching between light and dark themes to enhance user experience.",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Use CSS transitions for color changes. Implement a transition overlay if needed. Ensure transitions work for both system preference changes and manual toggles.",
             "status": "pending",
             "testStrategy": ""
@@ -1226,10 +1013,7 @@
         "details": "Implement user-facing controls for data sharing preferences. Create a data export feature for user data portability. Develop a secure process for permanent data deletion upon user request. Update privacy policy and terms of service accordingly.",
         "testStrategy": "Verify opt-out functionality, test data export for completeness and format, ensure data deletion process is thorough and irreversible.",
         "priority": "high",
-        "dependencies": [
-          27,
-          28
-        ],
+        "dependencies": [27, 28],
         "status": "pending",
         "subtasks": [
           {
@@ -1245,9 +1029,7 @@
             "id": 2,
             "title": "Design and implement data export functionality",
             "description": "Create a system for users to request and receive their personal data",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Develop a process for users to initiate data export requests, compile user data from various sources within the system, and provide it in a standardized, readable format (e.g., JSON or CSV)",
             "status": "pending",
             "testStrategy": ""
@@ -1256,10 +1038,7 @@
             "id": 3,
             "title": "Develop secure data deletion processes",
             "description": "Implement mechanisms for permanent and verifiable data removal",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Create procedures for securely erasing user data upon request, including from main databases, backups, and any third-party services. Implement a verification system to ensure complete deletion",
             "status": "pending",
             "testStrategy": ""
@@ -1268,9 +1047,7 @@
             "id": 4,
             "title": "Implement data encryption and access controls",
             "description": "Enhance data security through encryption and strict access management",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Apply encryption to sensitive user data both at rest and in transit. Implement role-based access controls to ensure that only authorized personnel can access user data",
             "status": "pending",
             "testStrategy": ""
@@ -1279,12 +1056,7 @@
             "id": 5,
             "title": "Create data privacy documentation and user guides",
             "description": "Develop comprehensive documentation on data handling practices",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "dependencies": [1, 2, 3, 4],
             "details": "Write clear, user-friendly documentation explaining the platform's data privacy features, how to use them, and the rights users have regarding their personal data. Include this information in the platform's privacy policy and user guide",
             "status": "pending",
             "testStrategy": ""
@@ -1298,9 +1070,7 @@
         "details": "Develop a scoring system based on astrological aspects between users' charts. Implement weighting for different factors (e.g., Sun sign compatibility, Moon sign harmony). Create visually appealing representations of compatibility scores.",
         "testStrategy": "Test compatibility calculations with various astrological combinations, verify consistency and accuracy of scores, test edge cases and unusual chart combinations.",
         "priority": "medium",
-        "dependencies": [
-          31
-        ],
+        "dependencies": [31],
         "status": "pending",
         "subtasks": [
           {
@@ -1316,9 +1086,7 @@
             "id": 2,
             "title": "Develop factor weighting system",
             "description": "Create a system to assign weights to different astrological factors based on their importance in compatibility",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Analyze the relative importance of each astrological factor and develop a numerical weighting system. Consider using a scale of 1-10 or percentages to represent the significance of each factor.",
             "status": "pending",
             "testStrategy": ""
@@ -1327,9 +1095,7 @@
             "id": 3,
             "title": "Design compatibility calculation algorithm",
             "description": "Develop the core algorithm to calculate compatibility scores based on weighted factors",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Create a mathematical formula or set of rules that combines the weighted astrological factors to produce a final compatibility score. Consider using techniques like fuzzy logic or machine learning for more accurate results.",
             "status": "pending",
             "testStrategy": ""
@@ -1338,9 +1104,7 @@
             "id": 4,
             "title": "Implement score visualization",
             "description": "Design and implement a visual representation of compatibility scores",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Develop a graphical interface to display compatibility scores. Consider using charts, graphs, or custom visualizations that effectively communicate the level of compatibility and contribute to the overall user experience.",
             "status": "pending",
             "testStrategy": ""
@@ -1349,10 +1113,7 @@
             "id": 5,
             "title": "Test and refine algorithm",
             "description": "Conduct thorough testing of the compatibility algorithm and visualization, and make necessary refinements",
-            "dependencies": [
-              3,
-              4
-            ],
+            "dependencies": [3, 4],
             "details": "Create a test suite with various astrological combinations. Compare results with expert astrological opinions and user feedback. Iterate on the algorithm and visualization based on findings to improve accuracy and user satisfaction.",
             "status": "pending",
             "testStrategy": ""
@@ -1366,10 +1127,7 @@
         "details": "Use AES-256 encryption for birth data. Implement key management using the device's secure enclave. Store encrypted data in Firestore with strict security rules. Develop a system for secure data retrieval and decryption when needed for calculations.",
         "testStrategy": "Test encryption and decryption processes, verify data security in transit and at rest, ensure only authorized access to decrypted data.",
         "priority": "high",
-        "dependencies": [
-          27,
-          28
-        ],
+        "dependencies": [27, 28],
         "status": "pending",
         "subtasks": [
           {
@@ -1385,9 +1143,7 @@
             "id": 2,
             "title": "Implement key management system",
             "description": "Create a robust key management system for handling encryption keys",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Design key generation, storage, rotation, and revocation processes, ensuring secure key handling throughout the system",
             "status": "pending",
             "testStrategy": ""
@@ -1396,10 +1152,7 @@
             "id": 3,
             "title": "Develop secure data storage mechanism",
             "description": "Implement the actual secure data storage functionality",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Create functions for securely storing encrypted data, including proper error handling and logging",
             "status": "pending",
             "testStrategy": ""
@@ -1408,10 +1161,7 @@
             "id": 4,
             "title": "Implement secure data retrieval process",
             "description": "Develop methods for securely retrieving and decrypting stored data",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Create functions for data retrieval, decryption, and proper error handling for failed decryption attempts",
             "status": "pending",
             "testStrategy": ""
@@ -1420,10 +1170,7 @@
             "id": 5,
             "title": "Perform security audit and testing",
             "description": "Conduct thorough security testing and auditing of the implemented system",
-            "dependencies": [
-              3,
-              4
-            ],
+            "dependencies": [3, 4],
             "details": "Perform penetration testing, code review, and security analysis to identify and address potential vulnerabilities",
             "status": "pending",
             "testStrategy": ""
@@ -1437,11 +1184,7 @@
         "details": "Design and implement a user profile screen with editable fields. Create a settings screen for app preferences, notification controls, and privacy settings. Implement real-time updates to Firestore when profile or settings are changed.",
         "testStrategy": "Test profile editing functionality, verify settings changes are applied immediately and persisted, ensure proper validation of user inputs.",
         "priority": "medium",
-        "dependencies": [
-          26,
-          27,
-          28
-        ],
+        "dependencies": [26, 27, 28],
         "status": "pending",
         "subtasks": [
           {
@@ -1457,9 +1200,7 @@
             "id": 2,
             "title": "Implement data management for user profiles",
             "description": "Develop the backend structure to store and retrieve user profile and settings data efficiently.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create database schemas for user profiles. Implement API endpoints for CRUD operations on user data. Ensure data validation and security measures are in place.",
             "status": "pending",
             "testStrategy": ""
@@ -1468,10 +1209,7 @@
             "id": 3,
             "title": "Develop frontend components for profile and settings",
             "description": "Build reusable React components for the user profile and settings screens based on the UI design.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Create form components for editing user information. Implement state management for local updates. Ensure proper error handling and user feedback for form submissions.",
             "status": "pending",
             "testStrategy": ""
@@ -1480,10 +1218,7 @@
             "id": 4,
             "title": "Implement real-time updates for user data",
             "description": "Set up a system for real-time synchronization of user profile and settings data between the frontend and backend.",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Use WebSockets or a similar technology for real-time communication. Implement optimistic updates on the frontend for a smooth user experience. Ensure proper error handling and conflict resolution for simultaneous updates.",
             "status": "pending",
             "testStrategy": ""
@@ -1497,9 +1232,7 @@
         "details": "Implement global error boundary in React Native. Integrate a crash reporting tool like Sentry or Firebase Crashlytics. Create user-friendly error messages and recovery flows. Implement logging for non-fatal errors and performance issues.",
         "testStrategy": "Simulate various error scenarios to test handling and reporting, verify crash reports are properly collected and transmitted, test error recovery flows.",
         "priority": "high",
-        "dependencies": [
-          26
-        ],
+        "dependencies": [26],
         "status": "pending",
         "subtasks": [
           {
@@ -1515,9 +1248,7 @@
             "id": 2,
             "title": "Implement global error handling mechanism",
             "description": "Create a centralized error handling system to catch and process unhandled exceptions",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Develop a global error handler that can catch unhandled exceptions across the application. Implement logging and error categorization to facilitate easier debugging and analysis.",
             "status": "pending",
             "testStrategy": ""
@@ -1526,10 +1257,7 @@
             "id": 3,
             "title": "Integrate selected error reporting tool",
             "description": "Incorporate the chosen error reporting tool into the application",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Follow the documentation to integrate the selected tool. Set up proper error filtering and grouping. Ensure sensitive information is not accidentally logged or transmitted.",
             "status": "pending",
             "testStrategy": ""
@@ -1538,10 +1266,7 @@
             "id": 4,
             "title": "Design and implement user-friendly error flows",
             "description": "Create intuitive error messages and recovery paths for various error scenarios",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Develop a set of user-friendly error messages for common scenarios. Design UI components for displaying errors. Implement error recovery flows where possible, such as retry mechanisms or graceful degradation of features.",
             "status": "pending",
             "testStrategy": ""
@@ -1555,10 +1280,7 @@
         "details": "Integrate Firebase Analytics for basic event tracking. Implement custom events for key user actions (connections made, NFTs minted, chat engagement). Create dashboards for monitoring user retention, feature usage, and monetization metrics.",
         "testStrategy": "Verify correct tracking of custom events, test data accuracy in analytics dashboards, ensure compliance with privacy regulations in data collection.",
         "priority": "medium",
-        "dependencies": [
-          26,
-          38
-        ],
+        "dependencies": [26, 38],
         "status": "pending",
         "subtasks": [
           {
@@ -1574,9 +1296,7 @@
             "id": 2,
             "title": "Implement analytics SDK and event tracking",
             "description": "Integrate the chosen analytics SDK and implement event tracking throughout the application",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Select and integrate an appropriate analytics SDK. Implement event tracking code for all defined events, ensuring proper data collection and transmission. Test thoroughly to verify accurate event firing and data capture.",
             "status": "pending",
             "testStrategy": ""
@@ -1585,9 +1305,7 @@
             "id": 3,
             "title": "Ensure privacy compliance",
             "description": "Implement measures to ensure data collection adheres to privacy regulations",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Review privacy laws (e.g., GDPR, CCPA) and implement necessary consent mechanisms. Anonymize or pseudonymize data where required. Create data retention and deletion policies. Update privacy policy to reflect analytics practices.",
             "status": "pending",
             "testStrategy": ""
@@ -1596,11 +1314,7 @@
             "id": 4,
             "title": "Create analytics dashboard",
             "description": "Design and implement a dashboard to visualize collected analytics data",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "Use the analytics platform's dashboard tools or a separate visualization tool to create a comprehensive dashboard. Include key metrics, user behavior flows, and customizable date ranges. Ensure the dashboard is accessible to relevant team members and stakeholders.",
             "status": "pending",
             "testStrategy": ""
@@ -1614,12 +1328,7 @@
         "details": "Profile app performance using React Native Performance Monitor. Optimize render cycles and reduce unnecessary re-renders. Implement efficient list rendering using FlatList with optimized configurations. Use memoization for expensive calculations. Optimize network requests and implement efficient caching strategies.",
         "testStrategy": "Conduct performance benchmarks for key flows, especially the pairing to NFT minting process. Test on various device types to ensure consistent performance. Use tools like Flipper for detailed performance analysis.",
         "priority": "high",
-        "dependencies": [
-          29,
-          30,
-          31,
-          32
-        ],
+        "dependencies": [29, 30, 31, 32],
         "status": "pending",
         "subtasks": [
           {
@@ -1635,9 +1344,7 @@
             "id": 2,
             "title": "Conduct initial performance audit",
             "description": "Perform a comprehensive performance audit of the app",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Use the profiling tools to analyze app performance, identifying bottlenecks in rendering, JavaScript execution, and network requests. Document findings for prioritization.",
             "status": "pending",
             "testStrategy": ""
@@ -1646,9 +1353,7 @@
             "id": 3,
             "title": "Optimize render performance",
             "description": "Implement techniques to improve render efficiency",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Apply React Native best practices such as using PureComponent, shouldComponentUpdate, and memo. Implement list optimization techniques like FlatList and RecyclerListView.",
             "status": "pending",
             "testStrategy": ""
@@ -1657,9 +1362,7 @@
             "id": 4,
             "title": "Enhance JavaScript execution",
             "description": "Optimize JavaScript code for better performance",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Refactor JavaScript code to reduce unnecessary computations, implement memoization, and optimize loops and data structures. Consider using worker threads for heavy computations.",
             "status": "pending",
             "testStrategy": ""
@@ -1668,9 +1371,7 @@
             "id": 5,
             "title": "Improve network request efficiency",
             "description": "Optimize network requests and data fetching",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Implement efficient caching strategies, use pagination and lazy loading for large datasets, and optimize API calls. Consider using GraphQL for more efficient data fetching.",
             "status": "pending",
             "testStrategy": ""
@@ -1679,9 +1380,7 @@
             "id": 6,
             "title": "Optimize asset loading and management",
             "description": "Improve handling of images, fonts, and other assets",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "Implement proper image caching, use appropriate image formats and sizes, and optimize font loading. Consider using asset preloading for critical resources.",
             "status": "pending",
             "testStrategy": ""
@@ -1690,12 +1389,7 @@
             "id": 7,
             "title": "Conduct final performance testing and documentation",
             "description": "Perform thorough testing and document optimizations",
-            "dependencies": [
-              3,
-              4,
-              5,
-              6
-            ],
+            "dependencies": [3, 4, 5, 6],
             "details": "Run comprehensive performance tests to measure improvements. Document all optimizations implemented, their impact, and any remaining performance considerations for future development.",
             "status": "pending",
             "testStrategy": ""
@@ -1709,9 +1403,7 @@
         "details": "Configure GitHub Actions for CI/CD. Set up automated testing, including unit tests, integration tests, and UI tests. Implement code quality checks using ESLint and Prettier. Configure automated deployment to TestFlight and Google Play Beta. Set up staging and production environments with appropriate safeguards.",
         "testStrategy": "Verify successful builds and test runs on each commit, test deployment process to beta channels, ensure proper versioning and changelog generation.",
         "priority": "medium",
-        "dependencies": [
-          26
-        ],
+        "dependencies": [26],
         "status": "pending",
         "subtasks": [
           {
@@ -1727,9 +1419,7 @@
             "id": 2,
             "title": "Implement Automated Testing",
             "description": "Set up automated unit, integration, and end-to-end tests to run as part of the CI pipeline.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Configure test runners, write test scripts, and ensure tests are executed automatically on each code push or pull request.",
             "status": "pending",
             "testStrategy": ""
@@ -1738,9 +1428,7 @@
             "id": 3,
             "title": "Implement Code Quality Checks",
             "description": "Integrate code linting, static analysis, and code coverage tools into the CI pipeline.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Set up tools like ESLint, SonarQube, or CodeClimate, configure rule sets, and ensure code quality reports are generated for each build.",
             "status": "pending",
             "testStrategy": ""
@@ -1749,11 +1437,7 @@
             "id": 4,
             "title": "Configure Deployment Processes",
             "description": "Set up automated deployment processes for different environments (e.g., staging, production).",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "Define deployment scripts, set up environment-specific configurations, and implement rollback mechanisms.",
             "status": "pending",
             "testStrategy": ""
@@ -1762,12 +1446,7 @@
             "id": 5,
             "title": "Implement Monitoring and Notifications",
             "description": "Set up monitoring for the CI/CD pipeline and configure notifications for build and deployment status.",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "dependencies": [1, 2, 3, 4],
             "details": "Integrate with monitoring tools, set up alerting mechanisms, and configure email or chat notifications for team members.",
             "status": "pending",
             "testStrategy": ""
@@ -1781,10 +1460,7 @@
         "details": "Create user guides for key features and flows. Implement an in-app help center using a webview or native components. Develop a FAQ section covering common questions and issues. Create video tutorials for complex features. Integrate a support ticket system for user inquiries.",
         "testStrategy": "Review documentation for clarity and completeness, test in-app help center navigation and content display, verify support ticket submission and tracking functionality.",
         "priority": "low",
-        "dependencies": [
-          26,
-          46
-        ],
+        "dependencies": [26, 46],
         "status": "pending",
         "subtasks": [
           {
@@ -1800,9 +1476,7 @@
             "id": 2,
             "title": "Implement help center structure",
             "description": "Set up the structure and categories for the online help center",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create main categories based on app sections, set up search functionality, and ensure mobile responsiveness.",
             "status": "pending",
             "testStrategy": ""
@@ -1811,10 +1485,7 @@
             "id": 3,
             "title": "Populate help center with content",
             "description": "Transfer and adapt user guide content to the help center",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Convert user guide sections into individual help articles, optimize for online reading, and add relevant tags for improved searchability.",
             "status": "pending",
             "testStrategy": ""
@@ -1823,10 +1494,7 @@
             "id": 4,
             "title": "Integrate support system",
             "description": "Connect the help center with the customer support ticketing system",
-            "dependencies": [
-              2,
-              3
-            ],
+            "dependencies": [2, 3],
             "details": "Set up links to create support tickets from help articles, implement a feedback mechanism for article helpfulness, and ensure smooth transition between help center and support system.",
             "status": "pending",
             "testStrategy": ""
@@ -1840,9 +1508,7 @@
         "details": "Research relevant keywords for app store listings. Create compelling app descriptions, screenshots, and preview videos. Implement localization for key markets. Set up A/B testing for app store assets. Develop a strategy for encouraging positive user reviews and ratings.",
         "testStrategy": "Monitor keyword rankings and visibility scores, track conversion rates from page views to downloads, analyze user feedback and adjust strategy accordingly.",
         "priority": "low",
-        "dependencies": [
-          26
-        ],
+        "dependencies": [26],
         "status": "pending",
         "subtasks": [
           {
@@ -1858,9 +1524,7 @@
             "id": 2,
             "title": "Create App Store Assets",
             "description": "Design and develop visual and textual assets for the app store listing",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Create app icon, screenshots, preview video, and write compelling app title, subtitle, and description incorporating researched keywords.",
             "status": "pending",
             "testStrategy": ""
@@ -1869,10 +1533,7 @@
             "id": 3,
             "title": "Implement ASO Strategy",
             "description": "Apply the researched keywords and created assets to the app store listing",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Optimize app metadata, including title, subtitle, keyword field, and description. Upload visual assets and ensure all elements are cohesive and appealing.",
             "status": "pending",
             "testStrategy": ""
@@ -1881,9 +1542,7 @@
             "id": 4,
             "title": "Develop User Review Strategy",
             "description": "Create a plan to encourage and manage user reviews and ratings",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Implement in-app review prompts, create a feedback loop for addressing user concerns, and develop a strategy for responding to reviews and encouraging satisfied users to leave positive feedback.",
             "status": "pending",
             "testStrategy": ""
@@ -1898,26 +1557,8 @@
         "testStrategy": "Monitor tester engagement and completion of test scenarios, analyze bug reports and user feedback, verify fixes for reported issues, conduct final round of testing after implementing improvements.",
         "priority": "high",
         "dependencies": [
-          26,
-          27,
-          28,
-          29,
-          30,
-          31,
-          32,
-          33,
-          34,
-          35,
-          36,
-          38,
-          39,
-          40,
-          41,
-          42,
-          43,
-          44,
-          45,
-          46
+          26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 39, 40, 41, 42, 43,
+          44, 45, 46
         ],
         "status": "pending",
         "subtasks": [
@@ -1934,9 +1575,7 @@
             "id": 2,
             "title": "Recruit UAT Testers",
             "description": "Identify and onboard suitable testers for the UAT process",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "Define tester criteria, reach out to potential participants, and select a diverse group of testers representing different user personas. Provide necessary instructions and access to testing environment.",
             "status": "pending",
             "testStrategy": ""
@@ -1945,10 +1584,7 @@
             "id": 3,
             "title": "Conduct UAT Sessions",
             "description": "Execute the UAT test plan with recruited testers",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "Schedule and facilitate UAT sessions. Guide testers through test scenarios, observe user interactions, and ensure all test cases are covered. Provide support for any technical issues during testing.",
             "status": "pending",
             "testStrategy": ""
@@ -1957,9 +1593,7 @@
             "id": 4,
             "title": "Collect and Analyze Feedback",
             "description": "Gather feedback from UAT testers and analyze results",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "Collect feedback through surveys, interviews, and test logs. Compile and categorize all reported issues, usability concerns, and suggestions. Analyze feedback to identify patterns and critical issues.",
             "status": "pending",
             "testStrategy": ""
@@ -1968,9 +1602,7 @@
             "id": 5,
             "title": "Prioritize and Address Issues",
             "description": "Evaluate and prioritize identified issues for resolution",
-            "dependencies": [
-              4
-            ],
+            "dependencies": [4],
             "details": "Assess the severity and impact of each reported issue. Prioritize fixes based on criticality and project timeline. Create action items for development team to address high-priority issues before app release.",
             "status": "pending",
             "testStrategy": ""
