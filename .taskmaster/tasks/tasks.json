@@ -236,7 +236,7 @@
               1
             ],
             "details": "Implement a KeyStorageService class using expo-secure-store with methods for storing, retrieving, and deleting private keys. Ensure keys are stored with appropriate security options (WHEN_UNLOCKED). Add encryption layer before storing sensitive data. Include error handling for storage failures.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test storing and retrieving mock keys to verify the secure storage functionality works correctly."
           },
           {
@@ -247,7 +247,7 @@
               1
             ],
             "details": "Implement functions to generate random mnemonics of appropriate strength (12/24 words). Add validation to ensure mnemonics conform to BIP-39 standards. Create functions to convert between mnemonics and seed phrases. Include internationalization support for different language wordlists if needed.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test mnemonic generation, validation, and conversion to ensure they meet cryptographic standards."
           },
           {
@@ -259,7 +259,7 @@
               3
             ],
             "details": "Implement WalletService with createWallet() method that generates a new Aptos account and stores private keys securely. Add recoverWalletFromMnemonic() method to restore wallets. Include address derivation and validation. Implement getWalletBalance() to fetch account balances.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Test wallet creation, recovery, and balance checking with mock accounts and network responses."
           },
           {
@@ -510,7 +510,7 @@
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T08:36:32.816Z",
+      "updated": "2025-07-01T08:38:46.160Z",
       "description": "Tasks for master context"
     }
   }
