@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.chrislprice.astrophysicals"
+      "bundleIdentifier": "com.chrislprice.astrophysicals",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "This app uses Face ID to secure your wallet and sensitive data."
+      }
     },
     "android": {
       "adaptiveIcon": {
