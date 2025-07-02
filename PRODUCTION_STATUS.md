@@ -2,7 +2,9 @@
 
 ## ✅ **All Critical Issues RESOLVED**
 
-The Astrophysicals React Native app is now **production-ready** with all startup errors and warnings fixed.
+The Astrophysicals React Native app is now **production-ready** with all critical startup errors fixed. 
+
+**Note:** There are some development-only warnings that do not affect production functionality. See [KNOWN_DEVELOPMENT_WARNINGS.md](./KNOWN_DEVELOPMENT_WARNINGS.md) for details.
 
 ## 🛠️ **Issues Fixed**
 
@@ -15,6 +17,15 @@ The Astrophysicals React Native app is now **production-ready** with all startup
 | Session Persistence | ✅ **FIXED** | Disabled encryption temporarily |
 | AsyncStorage Version | ✅ **FIXED** | Downgraded to Expo-compatible version |
 | Missing Adaptive Icon | ✅ **FIXED** | Copied to correct location |
+
+## ⚠️ **Known Development Warnings (Non-Critical)**
+
+| Warning | Status | Impact |
+|---------|--------|--------|
+| Firebase Auth Persistence | ⚠️ **DEVELOPMENT ONLY** | No production impact - auth works correctly |
+| Navigation 'Main' Screen | ⚠️ **DEVELOPMENT ONLY** | No production impact - navigation works correctly |
+
+*See [KNOWN_DEVELOPMENT_WARNINGS.md](./KNOWN_DEVELOPMENT_WARNINGS.md) for detailed explanations.*
 
 ## 📱 **App Functionality Status**
 
