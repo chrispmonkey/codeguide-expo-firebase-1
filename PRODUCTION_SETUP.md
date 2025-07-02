@@ -16,7 +16,7 @@ This guide outlines the steps to make Astrophysicals production-ready after addr
 
 ### 3. **BIP39 Mnemonic Generation**
 - **Problem**: Node.js `bip39` library not compatible with React Native
-- **Solution**: Replaced with `react-native-bip39` library
+- **Solution**: Replaced with `@scure/bip39` library (React Native compatible)
 - **Status**: ✅ Fixed
 
 ### 4. **Navigation Structure**
@@ -29,16 +29,26 @@ This guide outlines the steps to make Astrophysicals production-ready after addr
 - **Solution**: Temporarily disabled encryption for session data
 - **Status**: ✅ Fixed (temporary)
 
+### 6. **AsyncStorage Version Compatibility**
+- **Problem**: Version mismatch with Expo requirements
+- **Solution**: Downgraded to AsyncStorage@2.1.2 as expected by Expo
+- **Status**: ✅ Fixed
+
+### 7. **Missing Adaptive Icon**
+- **Problem**: Android adaptive icon not found in expected location
+- **Solution**: Copied adaptive-icon.png to assets/images/ directory
+- **Status**: ✅ Fixed
+
 ## 🔧 Production Requirements
 
 ### 1. **Environment Setup**
 
 ```bash
 # Install required dependencies
-npm install @react-native-async-storage/async-storage
+npm install @react-native-async-storage/async-storage@2.1.2
 npm install react-native-get-random-values
 npm install expo-crypto
-npm install react-native-bip39
+npm install @scure/bip39 @scure/bip32
 ```
 
 ### 2. **Firebase Configuration**
