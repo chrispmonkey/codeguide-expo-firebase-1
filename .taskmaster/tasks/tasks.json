@@ -596,11 +596,25 @@
         ],
         "status": "pending",
         "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Production Critical Infrastructure Fixes",
+        "description": "Resolve critical startup errors for production readiness including Firebase Auth persistence, React Native crypto polyfills, BIP39 compatibility, navigation structure fixes, and session persistence issues.",
+        "details": "1. Fix Firebase Auth persistence issues:\n   - Implement proper persistence strategy for different platforms\n   - Resolve token refresh and session timeout issues\n   - Add error handling for auth state changes\n\n2. Add React Native crypto polyfills:\n   - Implement necessary crypto libraries for React Native environment\n   - Configure polyfills for cryptographic functions\n   - Ensure compatibility with web3 libraries\n\n3. Resolve BIP39 compatibility issues:\n   - Fix mnemonic generation and validation\n   - Ensure proper seed phrase handling\n   - Test compatibility across devices\n\n4. Fix navigation structure issues:\n   - Resolve deep linking problems\n   - Fix navigation state persistence\n   - Address screen transition bugs\n\n5. Solve session persistence problems:\n   - Implement secure storage for session data\n   - Add session recovery mechanisms\n   - Handle app background/foreground transitions properly\n\n6. Create comprehensive production setup documentation:\n   - Document environment setup procedures\n   - Create deployment checklists\n   - Add troubleshooting guides for common issues\n\nCode examples:\n\n```typescript\n// Firebase Auth persistence fix\nimport { getAuth, setPersistence, browserLocalPersistence, indexedDBLocalPersistence } from 'firebase/auth';\n\nconst auth = getAuth();\nsetPersistence(auth, Platform.OS === 'web' ? browserLocalPersistence : indexedDBLocalPersistence)\n  .then(() => {\n    // Auth persistence set successfully\n  })\n  .catch((error) => {\n    console.error('Auth persistence error:', error);\n  });\n\n// React Native crypto polyfills\nimport 'react-native-get-random-values';\nimport '@ethersproject/shims';\n\n// For older React Native versions\nif (typeof Buffer === 'undefined') {\n  global.Buffer = require('buffer').Buffer;\n}\nif (typeof process === 'undefined') {\n  global.process = require('process');\n}\n\n// BIP39 compatibility fix\nimport * as bip39 from 'bip39';\nimport { randomBytes } from 'crypto';\n\nconst generateMnemonic = () => {\n  const entropy = randomBytes(16);\n  return bip39.entropyToMnemonic(entropy);\n};\n\n// Session persistence implementation\nimport EncryptedStorage from 'react-native-encrypted-storage';\n\nconst storeUserSession = async (userData) => {\n  try {\n    await EncryptedStorage.setItem(\n      'user_session',\n      JSON.stringify(userData)\n    );\n  } catch (error) {\n    console.error('Failed to store session', error);\n  }\n};\n```",
+        "testStrategy": "1. Test Firebase Auth persistence:\n   - Verify user remains logged in after app restart\n   - Test token refresh mechanism works correctly\n   - Verify auth state is maintained across app launches\n   - Test auth persistence on different platforms (iOS, Android)\n\n2. Test crypto polyfills:\n   - Verify cryptographic functions work in React Native environment\n   - Test compatibility with web3 libraries\n   - Ensure random number generation works correctly\n   - Verify hash functions operate as expected\n\n3. Test BIP39 compatibility:\n   - Verify mnemonic generation produces valid phrases\n   - Test seed phrase validation\n   - Ensure compatibility with wallet standards\n   - Verify cross-device compatibility\n\n4. Test navigation structure:\n   - Verify deep linking works for all required routes\n   - Test navigation state persistence after app restart\n   - Verify screen transitions work smoothly\n   - Test back navigation behavior\n\n5. Test session persistence:\n   - Verify user session is maintained after app restart\n   - Test session recovery after app crash\n   - Verify secure storage of sensitive data\n   - Test session handling during background/foreground transitions\n\n6. Verify documentation:\n   - Review production setup documentation for completeness\n   - Validate deployment checklist with actual deployment\n   - Test troubleshooting guides against common issues\n   - Ensure all environment-specific configurations are documented",
+        "status": "done",
+        "dependencies": [
+          2,
+          8
+        ],
+        "priority": "high",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-07-01T07:21:41.997Z",
-      "updated": "2025-07-01T12:35:45.384Z",
+      "updated": "2025-07-02T00:09:15.476Z",
       "description": "Tasks for master context"
     }
   }

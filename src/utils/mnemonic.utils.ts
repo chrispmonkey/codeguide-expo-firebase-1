@@ -1,13 +1,6 @@
 import * as CryptoJS from 'crypto-js';
-
-// Use crypto-js instead of bip39 for React Native compatibility
-const { 
-  generateMnemonic: bip39Generate, 
-  validateMnemonic: bip39Validate,
-  mnemonicToSeed,
-  mnemonicToSeedSync,
-  wordlists 
-} = require('react-native-bip39');
+import { generateMnemonic, validateMnemonic, mnemonicToSeedSync } from '@scure/bip39';
+import { wordlist as englishWordlist } from '@scure/bip39/wordlists/english';
 
 // Supported mnemonic strengths (bits of entropy)
 export enum MnemonicStrength {
@@ -55,7 +48,7 @@ export class MnemonicUtils {
   ): MnemonicInfo {
     try {
       const wordlist = this.getWordlist(language);
-      const mnemonic = bip39Generate(strength, undefined, wordlist);
+      const mnemonic = generateMnemonic(wordlist, strength);
       
       return {
         mnemonic,
@@ -112,7 +105,7 @@ export class MnemonicUtils {
 
       // Validate with BIP-39
       const wordlist = this.getWordlist(language);
-      const isValidBip39 = bip39Validate(trimmedMnemonic, wordlist);
+      const isValidBip39 = validateMnemonic(trimmedMnemonic, wordlist);
       
       if (!isValidBip39) {
         result.errors.push('Invalid BIP-39 mnemonic phrase');
@@ -134,24 +127,13 @@ export class MnemonicUtils {
   }
 
   /**
-   * Convert mnemonic to seed (asynchronous)
+   * Convert mnemonic to seed (asynchronous - wrapper for sync)
    */
   static async mnemonicToSeed(
     mnemonic: string,
     passphrase: string = ''
   ): Promise<Uint8Array> {
-    try {
-      const validation = this.validateMnemonic(mnemonic);
-      if (!validation.isValid) {
-        throw new Error(`Invalid mnemonic: ${validation.errors.join(', ')}`);
-      }
-
-      const seed = await mnemonicToSeed(mnemonic, passphrase);
-      return new Uint8Array(seed);
-    } catch (error) {
-      console.error('Error converting mnemonic to seed:', error);
-      throw new Error('Failed to convert mnemonic to seed');
-    }
+    return this.mnemonicToSeedSync(mnemonic, passphrase);
   }
 
   /**
@@ -168,7 +150,7 @@ export class MnemonicUtils {
       }
 
       const seed = mnemonicToSeedSync(mnemonic, passphrase);
-      return new Uint8Array(seed);
+      return seed;
     } catch (error) {
       console.error('Error converting mnemonic to seed (sync):', error);
       throw new Error('Failed to convert mnemonic to seed');
@@ -238,26 +220,8 @@ export class MnemonicUtils {
    * Get wordlist for specified language
    */
   private static getWordlist(language: MnemonicLanguage): string[] {
-    switch (language) {
-      case MnemonicLanguage.ENGLISH:
-        return wordlists.english;
-      case MnemonicLanguage.JAPANESE:
-        return wordlists.japanese;
-      case MnemonicLanguage.CHINESE_SIMPLIFIED:
-        return wordlists.chinese_simplified;
-      case MnemonicLanguage.CHINESE_TRADITIONAL:
-        return wordlists.chinese_traditional;
-      case MnemonicLanguage.FRENCH:
-        return wordlists.french;
-      case MnemonicLanguage.ITALIAN:
-        return wordlists.italian;
-      case MnemonicLanguage.KOREAN:
-        return wordlists.korean;
-      case MnemonicLanguage.SPANISH:
-        return wordlists.spanish;
-      default:
-        return wordlists.english;
-    }
+    // For now, only support English until we import other wordlists
+    return englishWordlist;
   }
 
   /**
