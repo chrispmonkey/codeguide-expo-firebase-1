@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { User } from 'firebase/auth';
-import { AuthService, WalletService, KeyStorageService } from '../services';
+import { AuthService, WalletService, KeyStorageService, SiwaChallenge, SiwaSignaturePayload, SiwaAuthResult } from '../services';
 
 // Authentication state interface
 interface AuthState {
@@ -10,6 +10,7 @@ interface AuthState {
   isLoading: boolean;
   hasWallet: boolean;
   error: string | null;
+  isInitialized: boolean;
 }
 
 // Authentication actions
@@ -18,6 +19,7 @@ type AuthAction =
   | { type: 'AUTH_SUCCESS'; payload: { user: User; walletAddress?: string } }
   | { type: 'AUTH_ERROR'; payload: string }
   | { type: 'AUTH_LOGOUT' }
+  | { type: 'AUTH_INITIALIZED' }
   | { type: 'WALLET_CONNECTED'; payload: string }
   | { type: 'WALLET_DISCONNECTED' }
   | { type: 'CLEAR_ERROR' };
@@ -30,6 +32,7 @@ const initialState: AuthState = {
   isLoading: true,
   hasWallet: false,
   error: null,
+  isInitialized: false,
 };
 
 // Auth reducer
@@ -51,6 +54,7 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
         isLoading: false,
         hasWallet: !!action.payload.walletAddress,
         error: null,
+        isInitialized: true,
       };
     
     case 'AUTH_ERROR':
@@ -73,6 +77,14 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
         isLoading: false,
         hasWallet: false,
         error: null,
+        isInitialized: true,
+      };
+    
+    case 'AUTH_INITIALIZED':
+      return {
+        ...state,
+        isInitialized: true,
+        isLoading: false,
       };
     
     case 'WALLET_CONNECTED':
@@ -106,6 +118,12 @@ interface AuthContextType extends AuthState {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, createWallet?: boolean) => Promise<{ wallet?: any }>;
   signOut: () => Promise<void>;
+  
+  // SIWA methods
+  generateSiwaChallenge: (walletAddress: string) => Promise<SiwaChallenge>;
+  signInWithAptos: (payload: SiwaSignaturePayload) => Promise<SiwaAuthResult>;
+  registerWithAptos: (payload: SiwaSignaturePayload, userInfo?: { email?: string; displayName?: string }) => Promise<SiwaAuthResult>;
+  signMessageWithWallet: (walletAddress: string, message: string) => Promise<{ signature: string; publicKey: string } | null>;
   
   // Wallet methods
   createWallet: () => Promise<{ address: string; mnemonic: string }>;
@@ -150,7 +168,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const walletAddress = await loadUserWallet(user.uid);
         dispatch({
           type: 'AUTH_SUCCESS',
-          payload: { user, walletAddress }
+          payload: { user, walletAddress: walletAddress || undefined }
         });
         
         // Persist session
@@ -176,10 +194,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const walletAddress = await loadUserWallet(currentUser.uid);
         dispatch({
           type: 'AUTH_SUCCESS',
-          payload: { user: currentUser, walletAddress }
+          payload: { user: currentUser, walletAddress: walletAddress || undefined }
         });
       } else {
-        dispatch({ type: 'AUTH_LOADING', payload: false });
+        dispatch({ type: 'AUTH_INITIALIZED' });
       }
     } catch (error) {
       console.error('Error initializing auth:', error);
@@ -214,11 +232,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }),
         {
           requireAuthentication: false, // Session data doesn't need biometric auth
-          encrypt: true
+          encrypt: false // Disable encryption for session data to avoid crypto issues
         }
       );
     } catch (error) {
       console.error('Error persisting session:', error);
+      // Continue silently - session persistence is not critical for app functionality
     }
   }
 
@@ -357,12 +376,94 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return await walletService.hasStoredWallet(address);
   }
 
+  // Generate SIWA challenge
+  async function generateSiwaChallenge(walletAddress: string): Promise<SiwaChallenge> {
+    try {
+      return await authService.generateSiwaChallenge(walletAddress);
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: (error as Error).message });
+      throw error;
+    }
+  }
+
+  // Sign in with Aptos wallet
+  async function signInWithAptos(payload: SiwaSignaturePayload): Promise<SiwaAuthResult> {
+    try {
+      dispatch({ type: 'AUTH_LOADING', payload: true });
+      const result = await authService.verifySiwaSignature(payload);
+      
+      if (result.success && result.user) {
+        // Auth state will be updated by the onAuthStateChanged listener
+        dispatch({
+          type: 'AUTH_SUCCESS',
+          payload: { 
+            user: result.user as any, // Cast to Firebase User type
+            walletAddress: result.user.walletAddress || undefined
+          }
+        });
+      } else {
+        dispatch({ type: 'AUTH_LOADING', payload: false });
+      }
+      
+      return result;
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: (error as Error).message });
+      throw error;
+    }
+  }
+
+  // Register with Aptos wallet
+  async function registerWithAptos(
+    payload: SiwaSignaturePayload,
+    userInfo?: { email?: string; displayName?: string }
+  ): Promise<SiwaAuthResult> {
+    try {
+      dispatch({ type: 'AUTH_LOADING', payload: true });
+      const result = await authService.registerWithSiwa(payload, userInfo);
+      
+      if (result.success && result.user) {
+        // Auth state will be updated by the onAuthStateChanged listener
+        dispatch({
+          type: 'AUTH_SUCCESS',
+          payload: { 
+            user: result.user as any, // Cast to Firebase User type
+            walletAddress: result.user.walletAddress || undefined
+          }
+        });
+      } else {
+        dispatch({ type: 'AUTH_LOADING', payload: false });
+      }
+      
+      return result;
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: (error as Error).message });
+      throw error;
+    }
+  }
+
+  // Sign message with wallet (for testing/demo purposes)
+  async function signMessageWithWallet(
+    walletAddress: string,
+    message: string
+  ): Promise<{ signature: string; publicKey: string } | null> {
+    try {
+      return await authService.signMessageWithWallet(walletAddress, message);
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: (error as Error).message });
+      throw error;
+    }
+  }
+
   // Context value
   const contextValue: AuthContextType = {
     ...state,
     signIn,
     signUp,
     signOut,
+    generateSiwaChallenge,
+    signInWithAptos,
+    registerWithAptos,
+    signMessageWithWallet,
     createWallet,
     recoverWallet,
     connectWallet,

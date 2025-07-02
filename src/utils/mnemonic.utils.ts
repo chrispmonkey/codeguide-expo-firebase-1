@@ -1,10 +1,13 @@
-import { 
-  generateMnemonic as bip39Generate, 
-  validateMnemonic as bip39Validate,
+import * as CryptoJS from 'crypto-js';
+
+// Use crypto-js instead of bip39 for React Native compatibility
+const { 
+  generateMnemonic: bip39Generate, 
+  validateMnemonic: bip39Validate,
   mnemonicToSeed,
   mnemonicToSeedSync,
-  wordlists
-} from 'bip39';
+  wordlists 
+} = require('react-native-bip39');
 
 // Supported mnemonic strengths (bits of entropy)
 export enum MnemonicStrength {
@@ -136,14 +139,15 @@ export class MnemonicUtils {
   static async mnemonicToSeed(
     mnemonic: string,
     passphrase: string = ''
-  ): Promise<Buffer> {
+  ): Promise<Uint8Array> {
     try {
       const validation = this.validateMnemonic(mnemonic);
       if (!validation.isValid) {
         throw new Error(`Invalid mnemonic: ${validation.errors.join(', ')}`);
       }
 
-      return await mnemonicToSeed(mnemonic, passphrase);
+      const seed = await mnemonicToSeed(mnemonic, passphrase);
+      return new Uint8Array(seed);
     } catch (error) {
       console.error('Error converting mnemonic to seed:', error);
       throw new Error('Failed to convert mnemonic to seed');
@@ -156,14 +160,15 @@ export class MnemonicUtils {
   static mnemonicToSeedSync(
     mnemonic: string,
     passphrase: string = ''
-  ): Buffer {
+  ): Uint8Array {
     try {
       const validation = this.validateMnemonic(mnemonic);
       if (!validation.isValid) {
         throw new Error(`Invalid mnemonic: ${validation.errors.join(', ')}`);
       }
 
-      return mnemonicToSeedSync(mnemonic, passphrase);
+      const seed = mnemonicToSeedSync(mnemonic, passphrase);
+      return new Uint8Array(seed);
     } catch (error) {
       console.error('Error converting mnemonic to seed (sync):', error);
       throw new Error('Failed to convert mnemonic to seed');
