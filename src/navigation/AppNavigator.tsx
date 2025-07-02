@@ -44,6 +44,12 @@ export function AppNavigator() {
 
       try {
         setProfileCheckLoading(true);
+        
+        // Add a small delay to ensure Firebase Auth token is fully established
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        if (!mounted) return;
+        
         const hasUserProfile = await profileService.hasProfile(user);
         
         if (mounted) {
@@ -51,8 +57,31 @@ export function AppNavigator() {
         }
       } catch (error) {
         console.error('Error checking user profile:', error);
-        if (mounted) {
-          setHasProfile(false); // Default to requiring onboarding on error
+        
+        // If it's a permissions error, retry once after a longer delay
+        if (error && error.toString().includes('permissions')) {
+          console.log('Retrying profile check after permissions error...');
+          
+          try {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            if (!mounted) return;
+            
+            const hasUserProfile = await profileService.hasProfile(user);
+            
+            if (mounted) {
+              setHasProfile(hasUserProfile);
+            }
+          } catch (retryError) {
+            console.error('Retry failed, defaulting to onboarding:', retryError);
+            if (mounted) {
+              setHasProfile(false); // Default to requiring onboarding on error
+            }
+          }
+        } else {
+          if (mounted) {
+            setHasProfile(false); // Default to requiring onboarding on error
+          }
         }
       } finally {
         if (mounted) {

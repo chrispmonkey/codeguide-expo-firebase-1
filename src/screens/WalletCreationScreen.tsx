@@ -119,7 +119,7 @@ export function WalletCreationScreen({ navigation }: WalletCreationScreenProps) 
     Alert.alert(
       'Wallet Created Successfully',
       'Your wallet has been created and backed up securely.',
-      [{ text: 'Continue', onPress: () => navigation?.replace('Main') }]
+                  [{ text: 'Continue' }] // AppNavigator will handle routing automatically
     );
   };
 

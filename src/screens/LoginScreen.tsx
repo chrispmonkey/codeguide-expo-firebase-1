@@ -63,11 +63,11 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
         Alert.alert(
           'Success',
           'Account created successfully! Your wallet has been generated.',
-          [{ text: 'OK', onPress: () => navigation?.replace('Main') }]
+          [{ text: 'OK' }] // AppNavigator will handle routing automatically
         );
       } else {
         await signIn(email, password);
-        navigation?.replace('Main');
+        // AppNavigator will handle routing automatically after auth state change
       }
     } catch (error) {
       Alert.alert('Authentication Error', (error as Error).message);
@@ -123,7 +123,7 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
       
       if (result.success) {
         Alert.alert('Success', 'Signed in successfully!', [
-          { text: 'OK', onPress: () => navigation?.replace('Main') }
+          { text: 'OK' } // AppNavigator will handle routing automatically
         ]);
       } else if (result.requiresRegistration) {
         // If user doesn't exist, prompt for registration
@@ -156,7 +156,7 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
 
       if (result.success) {
         Alert.alert('Success', 'Account created successfully!', [
-          { text: 'OK', onPress: () => navigation?.replace('Main') }
+          { text: 'OK' } // AppNavigator will handle routing automatically
         ]);
       } else {
         Alert.alert('Error', result.error || 'Registration failed');

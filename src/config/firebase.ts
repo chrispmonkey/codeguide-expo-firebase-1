@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { getFunctions } from 'firebase/functions';
+import { configureFirebaseAuth, suppressFirebaseWarnings } from './firebase-auth-config';
 
 // Firebase configuration object
 const firebaseConfig = {
@@ -37,13 +37,14 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase services
 export const db = getFirestore(app);
-export const auth = getAuth(app);
+
+// Optional: Suppress Firebase warnings in development (uncomment if desired)
+// suppressFirebaseWarnings();
+
+// Initialize Auth with proper React Native persistence configuration
+export const auth = configureFirebaseAuth(app);
 export const storage = getStorage(app);
 export const functions = getFunctions(app);
-
-// Note: Firebase Auth persistence warning can be ignored in development
-// In production, consider implementing proper AsyncStorage persistence
-// when Firebase SDK supports the current React Native/Expo environment
 
 // Export the app instance for any other Firebase services that might be needed
 export default app; 

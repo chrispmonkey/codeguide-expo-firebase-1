@@ -137,7 +137,7 @@ export function WalletRecoveryScreen({ navigation }: WalletRecoveryScreenProps) 
         Alert.alert(
           'Wallet Recovered',
           'Your wallet has been successfully recovered!',
-          [{ text: 'Continue', onPress: () => navigation?.replace('Main') }]
+                      [{ text: 'Continue' }] // AppNavigator will handle routing automatically
         );
       } else {
         Alert.alert(
